@@ -1,110 +1,182 @@
 <template>
+  <div class="min-h-screen bg-neutral-50">
 
-  <div class=" bg-blue-100 flex items-center justify-center min-h-screen ">
-    <div
-        v-if="isLoading"
-        class="fixed inset-0 flex items-center justify-center bg-gray-50 bg-opacity-50 backdrop-blur-sm">
-      <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
-      <p class="ml-4 font-medium text-blue-700" >Chargement...</p>
-    </div>
+    <!-- Header -->
+    <Header />
 
-    <div class=" w-full max-w-md p-3 rounded-2xl bg-white ">
+    <!-- Contenu principal -->
+    <main class="min-h-screen p-8">
+<!--      <div class="justify-end flex flex-row gap-4 pt-5 pb-5 pl-5">-->
+      <div class="flex flex-wrap justify-end mx-auto gap-4">
 
-      <div class="p-10">
-        <div class="rounded-full h-32 w-32 bg-blue-200 ml-28 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-blue-500">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-          </svg>
-        </div>
-        <header class="py-2 px-4 text-center">
-          <p class=" text-center text-black font-bold pt-2 capitalize text-4xl">Wap App</p>
-          <p class="text-gray-500 mt-4 text-center font-bold">Account number</p>
-        </header>
-        <div class="p-4 ">
-          <div class="relative border-gray-300 flex justify-center gap-2">
-            <input
-                v-for="(value, index) in code"
-                :key="index"
-                v-model="code[index]"
-                type="text"
-                maxlength="1"
-                class="w-12 h-12 text-center text-xl border-2 border-gray-300 rounded-lg bg-gray-100
-              focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200 transition
-              duration-300 placeholder-gray-600 m-2"
-                @input="handleCodeInput(index)"
-            />
+        <Card title="992" description="messages envoyés">
+          <template #icon>
+            <svg class="w-6 h-6 text-green-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+              <path d="M17 0h-5.768a1 1 0 1 0 0 2h3.354L8.4 8.182A1.003 1.003 0 1 0 9.818 9.6L16 3.414v3.354a1 1 0 0 0 2 0V1a1 1 0 0 0-1-1Z"/>
+              <path d="m14.258 7.985-3.025 3.025A3 3 0 1 1 6.99 6.768l3.026-3.026A3.01 3.01 0 0 1 8.411 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V9.589a3.011 3.011 0 0 1-1.742-1.604Z"/>
+            </svg>
+          </template>
+        </Card>
+
+        <Card title="15 XAF" description="Montant par Messages">
+          <template #icon>
+            <svg class="w-6 h-6 text-green-500 dark:text-white" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 84 84" fill="currentColor" aria-hidden="true">
+              <path d="M61.25,55.669c0-7.974-5.207-13.201-15.448-15.57v-20.77c7.415,0.763,8.724,4.249,8.724,11.349
+                      c0,0.365,0.168,0.709,0.457,0.934c0.288,0.224,0.66,0.301,1.017,0.212l3.887-0.992c0.542-0.139,0.914-0.639,0.888-1.198
+                      c-0.442-9.722-3.152-15.699-14.972-16.656V0.787C45.802,0.352,45.45,0,45.014,0h-5.512c-0.435,0-0.787,0.353-0.787,0.787V13.02
+                      c-10.034,1.006-15.131,6.522-15.131,16.468c0,7.891,5.097,13.095,15.131,15.497v20.891c-9.191-0.669-9.198-4.301-9.198-11.396
+                      c0-0.354-0.159-0.689-0.434-0.914c-0.275-0.226-0.637-0.315-0.983-0.242l-3.888,0.793c-0.568,0.115-0.968,0.625-0.944,1.205
+                      c0.38,9.512,1.74,15.983,15.447,16.887V83.73c0,0.436,0.352,0.787,0.787,0.787h5.512c0.436,0,0.788-0.353,0.788-0.787V72.136
+                      C56.046,71.129,61.25,65.613,61.25,55.669z M54.921,55.669c0,5.983-2.928,9.241-9.119,10.089V46.806
+                      C51.849,48.863,54.921,51.83,54.921,55.669z M38.715,38.242c-5.838-2.052-8.802-4.982-8.802-8.754
+                      c0-5.973,2.825-9.229,8.802-10.084V38.242z"
+              />
+            </svg>
+          </template>
+        </Card>
+
+        <Card title="1000 XAF" description="solde du compte">
+          <template #icon>
+            <svg class="w-6 h-6 text-green-500 dark:text-white" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 84 84" fill="currentColor" aria-hidden="true">
+              <path d="M61.25,55.669c0-7.974-5.207-13.201-15.448-15.57v-20.77c7.415,0.763,8.724,4.249,8.724,11.349
+                      c0,0.365,0.168,0.709,0.457,0.934c0.288,0.224,0.66,0.301,1.017,0.212l3.887-0.992c0.542-0.139,0.914-0.639,0.888-1.198
+                      c-0.442-9.722-3.152-15.699-14.972-16.656V0.787C45.802,0.352,45.45,0,45.014,0h-5.512c-0.435,0-0.787,0.353-0.787,0.787V13.02
+                      c-10.034,1.006-15.131,6.522-15.131,16.468c0,7.891,5.097,13.095,15.131,15.497v20.891c-9.191-0.669-9.198-4.301-9.198-11.396
+                      c0-0.354-0.159-0.689-0.434-0.914c-0.275-0.226-0.637-0.315-0.983-0.242l-3.888,0.793c-0.568,0.115-0.968,0.625-0.944,1.205
+                      c0.38,9.512,1.74,15.983,15.447,16.887V83.73c0,0.436,0.352,0.787,0.787,0.787h5.512c0.436,0,0.788-0.353,0.788-0.787V72.136
+                      C56.046,71.129,61.25,65.613,61.25,55.669z M54.921,55.669c0,5.983-2.928,9.241-9.119,10.089V46.806
+                      C51.849,48.863,54.921,51.83,54.921,55.669z M38.715,38.242c-5.838-2.052-8.802-4.982-8.802-8.754
+                      c0-5.973,2.825-9.229,8.802-10.084V38.242z"
+              />
+            </svg>
+          </template>
+        </Card>
+
+        <Card title="546" description="messages lus">
+          <template #icon>
+            <svg class="w-6 h-6 text-green-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+              <path d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3.546l3.2 3.659a1 1 0 0 0 1.506 0L13.454 14H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-8 10H5a1 1 0 0 1 0-2h5a1 1 0 1 1 0 2Zm5-4H5a1 1 0 0 1 0-2h10a1 1 0 1 1 0 2Z"/>
+            </svg>
+          </template>
+        </Card>
+
+<!--        <Card title="546" description="Réponses">-->
+<!--          <template #icon>-->
+<!--            <svg class="w-6 h-6 text-green-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">-->
+<!--              <path d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3.546l3.2 3.659a1 1 0 0 0 1.506 0L13.454 14H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-8 10H5a1 1 0 0 1 0-2h5a1 1 0 1 1 0 2Zm5-4H5a1 1 0 0 1 0-2h10a1 1 0 1 1 0 2Z"/>-->
+<!--            </svg>-->
+<!--          </template>-->
+<!--        </Card>-->
+      </div>
+
+      <div class="flex flex-row gap-4 pt-8">
+        <div class="rounded-2xl p-5 w-full h-auto border">
+          <div class="w-full max-w-6xl mx-auto p-6">
+            <!-- En-tête -->
+            <div class="flex justify-between items-center mb-8">
+              <h2 class="text-2xl font-bold">statistiques des échanges</h2>
+              <div class="flex gap-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-4 h-4 bg-blue-600 rounded"></div>
+                  <span>Envoyé</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="w-4 h-4 bg-sky-400 rounded"></div>
+                  <span>Reçu</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="w-4 h-4 bg-orange-500 rounded"></div>
+                  <span>Réponse</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Graphique -->
+            <div class="relative h-[500px]">
+              <!-- Axe Y -->
+              <div class="absolute left-0 h-full flex flex-col justify-between text-gray-600 border-r-2 border-gray-400 ">
+                <span class="border bg-gray-300">200</span>
+                <span class="border bg-gray-300">150</span>
+                <span class="border bg-gray-300">100</span>
+                <span class="border bg-gray-300">50</span>
+                <span class="border bg-gray-300">0</span>
+              </div>
+
+              <!-- Barres -->
+<!--              <div class="ml-16 h-full flex items-end justify-between">-->
+              <div class="ml-16 h-full flex items-end justify-between gap-2 text-xs">
+                <div v-for="data in Data" :key="data.month"
+                     class="relative w-16 flex flex-col items-center border-b-2 border-gray-400">
+                  <!-- envoyés -->
+                  <div class="w-4 bg-blue-600"
+                       :style="{ height: calculateHeight(data.send) }"></div>
+                  <!-- reçu -->
+                  <div class="w-4 bg-sky-400 -mt-[1px]"
+                       :style="{ height: calculateHeight(data.received) }"></div>
+                  <!-- Réponse -->
+                  <div class="w-4 bg-orange-500 -mt-[1px]"
+                       :style="{ height: calculateHeight(data.response) }"></div>
+                  <!-- Mois -->
+                  <span class="absolute -bottom-6 text-gray-600">{{ data.month }}</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <p v-if="errors.code" class="text-red-600 text-sm mt-1">{{ errors.code }}</p>
-
         </div>
-        <div class="py-3 mt-2 w-full flex">
-          <button
-              @click="router.push('/')"
-              class=" text-black text-lg font-bold rounded-xl hover:text-black
-            transition duration-300 capitalize ml-6"
-          >
-            Retour
-          </button>
-          <button
-              @click="handleSubmit"
-              class=" text-blue-600 text-lg font-bold rounded-xl hover:text-blue-800
-            transition duration-300 capitalize flex-1 ml-28"
-          >
-            continuer ➡️
-          </button>
+        <div class="rounded-2xl p-5 w-full max-w-xs border ">
         </div>
       </div>
 
-    </div>
+
+
+    </main>
+
+    <!-- Footer -->
+    <Footer class="mt-auto" />
+
   </div>
 
 </template>
 
-<script setup lang="ts" >
-import { useRouter } from 'vue-router';
-import { ref } from 'vue'
+<script setup>
 
-const router = useRouter();
+import { ref, onMounted } from 'vue'
 
-const isLoading = ref(false);
-const code = ref(['', '', '', '']);
+// Données pour le graphique
+const Data = ref([
+  { month: 'Jan', send: 110, received: 50, response: 40 },
+  { month: 'Feb', send: 100, received: 35, response: 30 },
+  { month: 'Mar', send: 95, received: 30, response: 20 },
+  { month: 'Apr', send: 85, received: 30, response: 25 },
+  { month: 'May', send: 80, received: 25, response: 20 },
+  { month: 'Jun', send: 55, received: 25, response: 25 },
+  { month: 'Jul', send: 40, received: 35, response: 30 },
+  { month: 'Aug', send: 45, received: 35, response: 30 },
+  { month: 'Sep', send: 90, received: 35, response: 25 },
+  { month: 'Oct', send: 55, received: 40, response: 30 },
+  { month: 'Nov', send: 95, received: 40, response: 35 },
+  { month: 'Dec', send: 60, received: 20, response: 20 },
+])
 
+// Calculer la hauteur maximale pour l'échelle
+const maxValue = ref(0)
+onMounted(() => {
+  maxValue.value = Math.max(...Data.value.map(data =>
+      data.send + data.received + data.response
+  ))
+})
 
-const errors = ref({
-  code: ''
-});
+// Fonction pour calculer la hauteur des barres
+const calculateHeight = (value) => {
 
-const handleCodeInput = (index: number) => {
-  if (code.value[index].length === 1 && index < code.value.length - 1) {
-    // Passer automatiquement au champ suivant
-    const nextInput = document.querySelectorAll('input')[index + 1];
-    nextInput && (nextInput as HTMLInputElement).focus();
-  } else if (code.value[index].length === 0 && index > 0) {
-    // Revenir automatiquement au champ précédent si l'utilisateur efface
-    const prevInput = document.querySelectorAll('input')[index - 1];
-    prevInput && (prevInput as HTMLInputElement).focus();
-  }
-};
+  const result = `${(value / maxValue.value) * 400}px`
+  console.log(result);
+  return result;
+}
 
-const handleSubmit = () => {
-  // Validation du CODE
-  if (code.value.some((digit) => digit === '')) {
-    errors.value.code = 'Please complete all fields.';
-  } else {
-    errors.value.code = '';
-    // Traitez le CODE ici (exemple : l'envoyer au backend)
-    const codeValue = code.value.join('')
-    console.log('Code soumis :', codeValue);
-    router.push('/login');
-  }
-};
-
-
-
-
+import Header from "./components/header.vue";
+import Footer from "./components/footer.vue";
+import Card from "./components/card.vue";
 </script>
-
-<style scoped>
-/* Styles personnalisés supplémentaires si nécessaire */
-</style>
-
