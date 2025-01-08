@@ -94,7 +94,7 @@ const handleSubmit = () => {
     errors.value.code = '';
     const codeValue = code.value.join('')
     console.log('Code soumis :', codeValue);
-    router.push('/');
+    router.push('/home');
   }
 };
 
