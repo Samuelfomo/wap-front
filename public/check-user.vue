@@ -20,7 +20,7 @@
           <div class="relative border-gray-300 flex justify-center ">
             <input
                 type="tel"
-            v-model="code"
+            v-model="mobile"
                 placeholder="+237699888..."
                 class="text-end px-6 py-2 text-lg border border-gray-400 rounded-xl
                  focus:outline-none focus:border-green-600 focus:ring-2
@@ -28,7 +28,7 @@
                  placeholder-gray-400 font-bold"
             >
           </div>
-          <p v-if="errors.code" class="text-red-600 text-sm mt-1 text-center ">{{ errors.code }}</p>
+          <p v-if="errors.mobile" class="text-red-600 text-sm mt-1 text-center ">{{ errors.mobile }}</p>
         </div>
 
 
@@ -49,24 +49,48 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import {Login}  from "@/class/Login";
 
 const router = useRouter();
 
 const isLoading = ref(false);
-const code = ref('');
+const mobile = ref('');
 const errors = ref({
-  code: '',
+  mobile: '',
 });
-const handleSubmit = () => {
+const handleSubmit = async () => {
   errors.value = {
-    code:''
+    mobile: ''
   };
 
-  if(!code.value){
-    errors.value.code='your account number is required';
+  if (!mobile.value) {
+    errors.value.mobile = 'your account number is required';
   }
-  if(!errors.value.code){
-    router.push('/login')
+
+  if (isNaN(Number(mobile.value))) {
+    errors.value.mobile = "Please enter a valid account number"
+  }
+  if (!errors.value.mobile) {
+    const mobileData = mobile.value.replace(/\s+/g, '');
+    console.log('mobile send is:', Number(mobileData))
+    try {
+      const response = new Login(
+          null,
+          null,
+          Number(mobileData),
+          null
+      )
+      response.Mobile_validator();
+      const result = await response.Check();
+      if (result) {
+        alert('connection success')
+        router.push('/login')
+      }
+    } catch (error) {
+      router.push('/login')
+      console.log('error has occurred',error)
+      throw new Error('Authentification fail!');
+    }
   }
 }
 

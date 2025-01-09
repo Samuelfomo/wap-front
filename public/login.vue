@@ -20,18 +20,19 @@
         <div class="p-4 mt-2 ">
           <div class="relative border-gray-300 flex justify-center gap-4">
             <input
-                v-for="(value, index) in code"
+                v-for="(value, index) in pin"
                 :key="index"
-                v-model="code[index]"
+                v-model="pin[index]"
                 type="text"
                 maxlength="1"
                 class="w-12 h-12 text-center text-xl border-2 border-gray-300 rounded-lg bg-gray-100
               focus:outline-none focus:border-green-600 focus:ring-2 focus:ring-green-200 transition
               duration-300 placeholder-gray-600"
-                @input="handleCodeInput(index)"
+                @input="handlepinInput(index)"
+                @keydown="handleKeyDown($event, index)"
             />
           </div>
-          <p v-if="errors.code" class="text-red-600 text-sm mt-1 text-center">{{ errors.code }}</p>
+          <p v-if="errors.pin" class="text-red-600 text-sm mt-1 text-center">{{ errors.pin }}</p>
         </div>
 
       </div>
@@ -61,40 +62,112 @@
 import { useRouter } from 'vue-router';
 import { ref } from 'vue'
 
+import {Login} from "@/class/Login";
+
 const router = useRouter();
 
 const isLoading = ref(false);
-const code = ref(['', '', '', '']);
+const pin = ref(['', '', '', '']);
 
 
 const errors = ref({
-  code: ''
+  pin: ''
 });
 
-const handleCodeInput = (index: number) => {
+const handlepinInput = (index: number) => {
 
-  if (code.value[index].length === 1 && index < code.value.length - 1)
+  if (pin.value[index].length === 1 && index < pin.value.length - 1)
   {
     // Passer automatiquement au champ suivant
     const nextInput = document.querySelectorAll('input')[index + 1];
     nextInput && (nextInput as HTMLInputElement).focus();
   }
-  else if (code.value[index].length === 0 && index > 0)
+  else if (pin.value[index].length === 0 && index > 0)
   {
     // Revenir automatiquement au champ précédent si l'utilisateur efface
     const prevInput = document.querySelectorAll('input')[index - 1];
     prevInput && (prevInput as HTMLInputElement).focus();
+    pin.value[index - 1] = '';
   }
 };
 
-const handleSubmit = () => {
-  if (code.value.some((digit) => digit === '')) {
-    errors.value.code = 'Please complete all fields.';
+// const handlepinInput = (index: number) => {
+//   if (pin.value[index].length === 1 && index < pin.value.length - 1) {
+//     // Passer au champ suivant
+//     const nextInput = document.querySelectorAll('input')[index + 1];
+//     nextInput && (nextInput as HTMLInputElement).focus();
+//   } else if (pin.value[index].length === 0) {
+//     // Si le champ actuel est vide
+//     if (index > 0) {
+//       // Retourner au champ précédent
+//       const prevInput = document.querySelectorAll('input')[index - 1];
+//       if (prevInput) {
+//         (prevInput as HTMLInputElement).focus();
+//         // Vider le champ précédent
+//         pin.value[index - 1] = '';
+//       }
+//     }
+//   }
+// };
+
+const handleKeyDown = (e: KeyboardEvent, index: number) => {
+  if (e.key === 'Backspace' && pin.value[index].length === 0 && index > 0) {
+    // Si Backspace est pressé sur un champ vide, focus et vide le précédent
+    const prevInput = document.querySelectorAll('input')[index - 1];
+    if (prevInput) {
+      (prevInput as HTMLInputElement).focus();
+      pin.value[index - 1] = '';
+    }
+  }
+};
+
+const handleSubmit = async () => {
+
+  // if (!pin.value.every((digit) => digit.trim() !== '')) {
+  //   errors.value.pin = 'Your PIN code is required.';
+  //   return;
+  // }
+  // if (pin.value.some((digit) => digit.replace(/\s+/g,'').trim() === '')) {
+  //   errors.value.pin = 'Please complete all fields.';
+  //   return;
+  // }
+  //
+  if (pin.value.some((digit, index) => {
+    const cleanedDigit = digit.replace(/\s+/g, '').trim();
+    if (cleanedDigit === '') {
+      // Efface le champ vide
+      pin.value[index] = '';
+      return true;
+    }
+    return false;
+  })) {
+    errors.value.pin = 'Please complete all fields.';
+
+    setTimeout(() => {
+      errors.value.pin = '';
+    }, 1000);
+
+    return;
   } else {
-    errors.value.code = '';
-    const codeValue = code.value.join('')
-    console.log('Code soumis :', codeValue);
-    router.push('/home');
+    errors.value.pin = '';
+    const pinValue = Number(pin.value.join('').replace(/\s+/g, '').trim());
+    try {
+      const response = new Login(
+          null,
+          null,
+          null,
+          pinValue
+      )
+      response.PIN_validator;
+      console.log('PIN soumis :', pinValue);
+      const result = await response.Login();
+      if (result) {
+        alert('connection success')
+        router.push('/home')
+      }
+    } catch (error) {
+      console.error('Check authentification fail', error)
+    }
   }
 };
 

@@ -5,9 +5,9 @@
     <Header />
 
     <!-- Contenu principal -->
-    <main class="min-h-screen p-8">
+    <main class="min-h-screen p-5 lg:p-10 lg:m-5 md:m-0 sm:m-0">
 <!--      <div class="justify-end flex flex-row gap-4 pt-5 pb-5 pl-5">-->
-      <div class="flex flex-wrap justify-end mx-auto gap-4">
+      <div class="flex flex-wrap justify-between mx-auto gap-5 lg:gap-0">
 
         <Card title="992" description="messages envoyés">
           <template #icon>
@@ -70,66 +70,81 @@
 <!--          </template>-->
 <!--        </Card>-->
       </div>
+      <div class="flex flex-wrap w-full h-screen max-h-60 bg-white mt-5 border rounded-lg">
+      </div>
 
-      <div class="flex flex-row gap-4 pt-8">
-        <div class="rounded-2xl p-5 w-full h-auto border">
-          <div class="w-full max-w-6xl mx-auto p-6">
+      <div class="flex flex-wrap w-full h-screen py-5 justify-between gap-5 lg:gap-0">
+        <div class="rounded-lg w-full max-w-3xl border bg-white p-5">
             <!-- En-tête -->
-            <div class="flex justify-between items-center mb-8">
-              <h2 class="text-2xl font-bold">statistiques des échanges</h2>
-              <div class="flex gap-4">
-                <div class="flex items-center gap-2">
-                  <div class="w-4 h-4 bg-blue-600 rounded"></div>
-                  <span>Envoyé</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-4 h-4 bg-sky-400 rounded"></div>
-                  <span>Reçu</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-4 h-4 bg-orange-500 rounded"></div>
-                  <span>Réponse</span>
-                </div>
-              </div>
-            </div>
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 p-5 gap-4">
+            <!-- Titre -->
+            <h2 class="text-xl sm:text-2xl font-bold capitalize text-center sm:text-left">Statistiques des échanges</h2>
 
-            <!-- Graphique -->
-            <div class="relative h-[500px]">
-              <!-- Axe Y -->
-              <div class="absolute left-0 h-full flex flex-col justify-between text-gray-600 border-r-2 border-gray-400 ">
-                <span class="border bg-gray-300">200</span>
-                <span class="border bg-gray-300">150</span>
-                <span class="border bg-gray-300">100</span>
-                <span class="border bg-gray-300">50</span>
-                <span class="border bg-gray-300">0</span>
+            <!-- Légende -->
+            <div class="flex flex-wrap gap-4 justify-center sm:justify-start">
+              <!-- Envoyé -->
+              <div class="flex items-center gap-2 text-sm sm:text-base">
+                <div class="w-4 h-4 bg-blue-600 rounded"></div>
+                <span>Envoyé</span>
               </div>
-
-              <!-- Barres -->
-<!--              <div class="ml-16 h-full flex items-end justify-between">-->
-              <div class="ml-16 h-full flex items-end justify-between gap-2 text-xs">
-                <div v-for="data in Data" :key="data.month"
-                     class="relative w-16 flex flex-col items-center border-b-2 border-gray-400">
-                  <!-- envoyés -->
-                  <div class="w-4 bg-blue-600"
-                       :style="{ height: calculateHeight(data.send) }"></div>
-                  <!-- reçu -->
-                  <div class="w-4 bg-sky-400 -mt-[1px]"
-                       :style="{ height: calculateHeight(data.received) }"></div>
-                  <!-- Réponse -->
-                  <div class="w-4 bg-orange-500 -mt-[1px]"
-                       :style="{ height: calculateHeight(data.response) }"></div>
-                  <!-- Mois -->
-                  <span class="absolute -bottom-6 text-gray-600">{{ data.month }}</span>
-                </div>
+              <!-- Reçu -->
+              <div class="flex items-center gap-2 text-sm sm:text-base">
+                <div class="w-4 h-4 bg-sky-400 rounded"></div>
+                <span>Reçu</span>
+              </div>
+              <!-- Réponse -->
+              <div class="flex items-center gap-2 text-sm sm:text-base">
+                <div class="w-4 h-4 bg-orange-500 rounded"></div>
+                <span>Réponse</span>
               </div>
             </div>
           </div>
+
+          <!-- Graphique -->
+
+          <div class="relative lg:h-[500px] sm:h-[400px] md:h-[300px]">
+            <!-- Axe Y -->
+            <div class="absolute left-0 h-full flex flex-col justify-between text-gray-600 border-r-2 border-gray-400">
+              <span class="border-b-2 border-gray-400 lg:text-md sm:text-sm">200</span>
+              <span class="border-b-2 border-gray-400 lg:text-md  sm:text-sm">150</span>
+              <span class="border-b-2 border-gray-400 lg:text-md  sm:text-sm">100</span>
+              <span class="border-b-2 border-gray-400 lg:text-md  sm:text-sm">50</span>
+              <span class="sm:text-sm">0</span>
+            </div>
+
+            <!-- Barres -->
+            <div class="ml-8 sm:ml-12 h-full flex items-end justify-between gap-1 sm:gap-2 text-[10px] sm:text-xs">
+              <div
+                  v-for="data in Data"
+                  :key="data.month"
+                  class="relative flex-1 flex flex-col items-center border-b-2 border-gray-400"
+              >
+                <!-- envoyés -->
+                <div
+                    class="w-[30%] sm:w-[20%] bg-blue-600"
+                    :style="{ height: calculateHeight(data.send) }"
+                ></div>
+                <!-- reçu -->
+                <div
+                    class="w-[30%] sm:w-[20%] bg-sky-400 -mt-[1px]"
+                    :style="{ height: calculateHeight(data.received) }"
+                ></div>
+                <!-- Réponse -->
+                <div
+                    class="w-[30%] sm:w-[20%] bg-orange-500 -mt-[1px]"
+                    :style="{ height: calculateHeight(data.response) }"
+                ></div>
+                <!-- Mois -->
+                <span class="absolute -bottom-6 text-gray-600 text-xs sm:text-sm">{{ data.month }}</span>
+              </div>
+            </div>
+          </div>
+
+
         </div>
-        <div class="rounded-2xl p-5 w-full max-w-xs border ">
+        <div class="rounded-lg w-full max-w-sm border bg-white">
         </div>
       </div>
-
-
 
     </main>
 
@@ -143,6 +158,9 @@
 <script setup>
 
 import { ref, onMounted } from 'vue'
+import Header from "./components/header.vue";
+import Footer from "./components/footer.vue";
+import Card from "./components/card.vue";
 
 // Données pour le graphique
 const Data = ref([
@@ -176,7 +194,4 @@ const calculateHeight = (value) => {
   return result;
 }
 
-import Header from "./components/header.vue";
-import Footer from "./components/footer.vue";
-import Card from "./components/card.vue";
 </script>

@@ -20,7 +20,7 @@ export default defineConfig({
     },
     open: true,
     host: true,
-    port: 3002
+    port: 5173
   },
   // Ajoutez cette section pour la production
   build: {

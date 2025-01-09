@@ -1,6 +1,6 @@
 <template>
   <div
-      class="border rounded-2xl cursor-pointer bg-white w-full xl:w-1/5 p-5"
+      class="border rounded-lg cursor-pointer bg-white w-full xl:w-1/5 p-5"
   >
     <slot name="icon"></slot>
     <h2 class="text-3xl font-bold mt-2">{{ title }}</h2>
