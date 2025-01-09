@@ -44,8 +44,8 @@ const login = new Login();
  }
  });
 
- router.post('/login/:login', async (req, res) => {
- const data = req.body.login;
+ router.post('/login/:pin', async (req, res) => {
+ const data = req.body.pin;
 
  console.log('Request received :', {
  body: req.body,
