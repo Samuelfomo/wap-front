@@ -59,16 +59,19 @@
 </template>
 
 <script setup lang="ts" >
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue'
 
 import {Login} from "@/class/Login";
 
 const router = useRouter();
+const route = useRoute();
 
 const isLoading = ref(false);
 const pin = ref(['', '', '', '']);
 
+const mobileFromQuery = Number(route.query.mobile as string)
+console.log('mobile received has:',mobileFromQuery)
 
 const errors = ref({
   pin: ''
@@ -90,26 +93,6 @@ const handlepinInput = (index: number) => {
     pin.value[index - 1] = '';
   }
 };
-
-// const handlepinInput = (index: number) => {
-//   if (pin.value[index].length === 1 && index < pin.value.length - 1) {
-//     // Passer au champ suivant
-//     const nextInput = document.querySelectorAll('input')[index + 1];
-//     nextInput && (nextInput as HTMLInputElement).focus();
-//   } else if (pin.value[index].length === 0) {
-//     // Si le champ actuel est vide
-//     if (index > 0) {
-//       // Retourner au champ précédent
-//       const prevInput = document.querySelectorAll('input')[index - 1];
-//       if (prevInput) {
-//         (prevInput as HTMLInputElement).focus();
-//         // Vider le champ précédent
-//         pin.value[index - 1] = '';
-//       }
-//     }
-//   }
-// };
-
 const handleKeyDown = (e: KeyboardEvent, index: number) => {
   if (e.key === 'Backspace' && pin.value[index].length === 0 && index > 0) {
     // Si Backspace est pressé sur un champ vide, focus et vide le précédent
@@ -122,16 +105,6 @@ const handleKeyDown = (e: KeyboardEvent, index: number) => {
 };
 
 const handleSubmit = async () => {
-
-  // if (!pin.value.every((digit) => digit.trim() !== '')) {
-  //   errors.value.pin = 'Your PIN code is required.';
-  //   return;
-  // }
-  // if (pin.value.some((digit) => digit.replace(/\s+/g,'').trim() === '')) {
-  //   errors.value.pin = 'Please complete all fields.';
-  //   return;
-  // }
-  //
   if (pin.value.some((digit, index) => {
     const cleanedDigit = digit.replace(/\s+/g, '').trim();
     if (cleanedDigit === '') {
@@ -152,24 +125,27 @@ const handleSubmit = async () => {
     errors.value.pin = '';
     const pinValue = Number(pin.value.join('').replace(/\s+/g, '').trim());
     try {
-      const response = new Login(
-          null,
-          null,
-          null,
-          pinValue
-      )
-      response.PIN_validator;
-      console.log('PIN soumis :', pinValue);
-      const result = await response.Login();
-      if (result) {
-        alert('connection success')
-        router.push('/home')
+      const pinvalid = new Login(null, null, null, pinValue);
+
+      console.log('pin send is:', pinValue)
+      const isPinValid = await pinvalid.PIN_validator();
+      if (!isPinValid) {
+        errors.value.pin = 'Invalid PIN format';
+        return;
       }
+          const response = new Login(null, null, mobileFromQuery, pinValue);
+          const result = await response.Login();
+          if(result){
+            console.log(result);
+              alert('connection success')
+              // router.push('/home')
+          }
     } catch (error) {
       console.error('Check authentification fail', error)
     }
   }
 };
+
 
 
 

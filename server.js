@@ -4,7 +4,7 @@ const cors = require('cors');
 const Login = require('./src-services/routes/login')
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 const host = process.env.HOST || 'http://localhost';
 
 // app.use(cors());
@@ -17,7 +17,7 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use('/', Login);
+app.use('/login', Login);
 
 app.use(express.static(path.join(__dirname, 'dist')));
 

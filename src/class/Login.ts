@@ -38,12 +38,12 @@ class Login{
     }
     async Login(){
         try {
-            const response = await fetch(` http://localhost:3000/login/pin`, {
+            const response = await fetch(`http://localhost:3002/login/auth/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ pin: this.pin }),
+                body: JSON.stringify({ pin: this.pin, mobile: this.mobile }),
             })
 
             if (response.ok && response.status === 200) {
@@ -89,9 +89,9 @@ class Login{
     // }
 
 
-    Mobile_validator(){
+    async Mobile_validator(){
         if (!this.mobile){
-            throw new Error('your account number is required')
+           return  new Error('your account number is required')
         }
         const regexNumberCam = /^(\+237|237)?6(2[0]\d{6}|[5-9]\d{7})$/;
         const orangeRegex = /^(\+237|237)?6(5[5-9]|8[5-9]|9[0-9])\d{6}$/;
@@ -100,21 +100,25 @@ class Login{
         const cleanedPhoneNumber = this.mobile.toString();
         if (!regexNumberCam.test(cleanedPhoneNumber) && !orangeRegex.test(cleanedPhoneNumber) && !mtnRegex.test(cleanedPhoneNumber)){
             console.log('Your account number is invalid.');
-            throw new Error('Your account number is invalid.')
+            return false;
+            // throw new Error('Your account number is invalid.')
         }
+        return true;
     }
 
     PIN_validator() {
         if (!this.pin) {
-            throw new Error('Your PIN is required');
+            throw new Error('Your Pin code must be Numeric');
         }
         const pinRegex = /^\d{4}$/;
         const cleanedPIN = this.pin.toString()
 
         if (!pinRegex.test(cleanedPIN)) {
-            console.log('Your PIN is invalid.');
-            throw new Error('Your PIN is invalid. It must be exactly 4 digits.');
+            console.log('Your PIN is invalid. It must be exactly 4 digits.');
+            // throw new Error('Your PIN is invalid. It must be exactly 4 digits.');
+            return false;
         }
+        return true;
     }
 }
 export {Login};

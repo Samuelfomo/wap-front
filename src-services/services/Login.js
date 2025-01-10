@@ -3,46 +3,49 @@ const axios = require('axios');
 class Login {
     constructor() {
         this.baseUrl = "http:192.168.100.103:3000";
-        this.username = 'whatsapp';
-        this.password = 'hjjjssgdgdhjsdhgs';
+
     }
 
-    async search(mobile) {
+    async connect(pin, mobile) {
         try {
-            const response = await axios.put(`${this.baseUrl}/check/`, {
-                mobile: mobile
+            const response = await axios.put(`${this.baseUrl}/login/auth/`, {
+                pin: String(pin),
+                mobile: String(mobile)
             }, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Basic ' + Buffer.from(`${this.username}:${this.password}`).toString('base64')
                 }
             });
-            // console.log(response);
             return response.data;
 
         } catch (error) {
-            console.error('User search failed:', error);
-            return null;
+            if (error.response.status === 401) {
+                console.error('Invalid credentials');
+            } else {
+                console.error('An unexpected error occurred:', error.message);
+            }
+            return null
         }
     }
-    async connect(pin) {
-        try {
-            const response = await axios.put(`${this.baseUrl}/login/`, {
-                pin: pin
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic ' + Buffer.from(`${this.username}:${this.password}`).toString('base64')
-                }
-            });
-            // console.log(response);
-            return response.data;
 
-        } catch (error) {
-            console.error('User login failed :', error);
-            return null;
-        }
-    }
+    // async search(data) {
+    //     try {
+    //         const response = await axios.put(`${this.baseUrl}/check/`, {
+    //             data: data,
+    //         }, {
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': 'Basic ' + Buffer.from(`${this.username}:${this.password}`).toString('base64')
+    //             }
+    //         });
+    //         // console.log(response);
+    //         return response.data;
+    //
+    //     } catch (error) {
+    //         console.error('User search failed:', error);
+    //         return null;
+    //     }
+    // }
 }
 
 module.exports = Login;

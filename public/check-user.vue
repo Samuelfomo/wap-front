@@ -80,14 +80,23 @@ const handleSubmit = async () => {
           Number(mobileData),
           null
       )
-      response.Mobile_validator();
-      const result = await response.Check();
-      if (result) {
-        alert('connection success')
-        router.push('/login')
+    const valid = await response.Mobile_validator();
+      console.log("verify mobile account is :", valid);
+      if(valid){
+        console.log('mobile value', mobile.value)
+        setTimeout(async ()=>{
+          await router.push({
+            name: 'login',
+            query: { mobile: mobile.value.toString()  }
+          });
+        }, 1000);
       }
+      // const result = await response.Check();
+      // if (valid) {
+      //   alert('connection success')
+      //   router.push('/login')
+      // }
     } catch (error) {
-      router.push('/login')
       console.log('error has occurred',error)
       throw new Error('Authentification fail!');
     }

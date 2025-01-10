@@ -70,11 +70,12 @@
 <!--          </template>-->
 <!--        </Card>-->
       </div>
-      <div class="flex flex-wrap w-full h-screen max-h-60 bg-white mt-5 border rounded-lg">
-      </div>
+<!--      <div class="flex flex-wrap w-full h-screen max-h-60 bg-white mt-5 border rounded-lg">-->
+<!--      </div>-->
 
       <div class="flex flex-wrap w-full h-screen py-5 justify-between gap-5 lg:gap-0">
-        <div class="rounded-lg w-full max-w-3xl border bg-white p-5">
+        <div class="w-full max-w-3xl p-5">
+<!--        <div class="rounded-lg w-full max-w-3xl border bg-white p-5">-->
             <!-- En-tête -->
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 p-5 gap-4">
             <!-- Titre -->
