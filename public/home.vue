@@ -150,7 +150,7 @@
     </main>
 
     <!-- Footer -->
-    <Footer class="mt-auto" />
+    <Footer class=" my-auto" />
 
   </div>
 

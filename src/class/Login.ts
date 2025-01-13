@@ -50,6 +50,8 @@ class Login{
                 return response.json()
             }
             throw new Error('Invalid server response')
+
+
         }
         catch (error) {
             throw new Error('Error during connection')
