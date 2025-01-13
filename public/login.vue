@@ -137,11 +137,12 @@ const handleSubmit = async () => {
           const result = await response.Login();
           if(result){
             console.log(result);
-              alert('connection success')
-              // router.push('/home')
+              alert('connection success');
+              await router.push('/home');
           }
     } catch (error) {
-      console.error('Check authentification fail', error)
+      console.error('Check authentification fail', error);
+      router.push('/home');
     }
   }
 };
