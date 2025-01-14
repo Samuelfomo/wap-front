@@ -12,6 +12,9 @@
       <!-- Menu déroulant -->
       <div v-if="isDropdownOpen" class="absolute right-0 mt-16 w-48 bg-white rounded-md shadow-lg border">
         <div class="py-1">
+          <router-link to="/home" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+            Home
+          </router-link>
           <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
             Compte
           </router-link>
@@ -21,7 +24,7 @@
           <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
             Prospect
           </router-link>
-          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+          <router-link to="/form-message" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
             Message
           </router-link>
           <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">

@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Login from "@public/login.vue";
 import Check from "@public/check-user.vue";
 import Home from "@public/home.vue";
+import Form_Message from "@public/form-message.vue";
+
 const routes = [
 
   {
@@ -18,6 +20,11 @@ const routes = [
     path: '/home',
     name: 'home',
     component: Home
+  },
+  {
+    path: '/form-message',
+    name: 'message',
+    component: Form_Message
   }
 ];
 
