@@ -47,7 +47,7 @@ class Login{
             })
 
             if (response.ok && response.status === 200) {
-                return response.json()
+                return response.json();
             }
             throw new Error('Invalid server response')
 

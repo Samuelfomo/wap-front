@@ -138,7 +138,7 @@ const handleSubmit = async () => {
           if(result){
             console.log(result);
               alert('connection success');
-              // await router.push('/home');
+              await router.push('/home');
           }
           else {
             console.error('User authentification fail');

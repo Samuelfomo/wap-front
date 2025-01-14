@@ -23,7 +23,7 @@ router.post('/auth/', async (req, res) => {
 
  try {
   const response = await login.connect(pin, mobile);
-  console.log('✅ Authentication successful');
+  console.log('✅ Authentication successful', response);
   return res.json(response);
  } catch (error) {
   // Log simplifié

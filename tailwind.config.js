@@ -13,7 +13,7 @@ export default {
         'patrick-hand': ['Patrick Hand', 'cursive']
       },
       backgroundImage: {
-        'login': "url('@/assets/images/background.jpg')",
+        'login': "url('@/assets/images/logo-wap.svg')",
       },
     },
   },
