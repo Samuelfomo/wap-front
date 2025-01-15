@@ -3,6 +3,7 @@ import Login from "@public/login.vue";
 import Check from "@public/check-user.vue";
 import Home from "@public/home.vue";
 import Form_Message from "@public/form-message.vue";
+import Compte from "@public/parameter/compte.vue";
 
 const routes = [
 
@@ -12,7 +13,7 @@ const routes = [
     component: Check
   },
   {
-    path: '/:login?',
+    path: '/login?',
     name: 'login',
     component: Login
   },
@@ -25,6 +26,11 @@ const routes = [
     path: '/form-message',
     name: 'message',
     component: Form_Message
+  },
+  {
+    path: '/compte',
+    name: 'compte',
+    component: Compte
   }
 ];
 

@@ -8,21 +8,21 @@
     <div class="flex-1 flex flex-col">
       <main class="flex-1 p-5 lg:p-10 lg:pt-2 lg:m-5 mb-10">
   <!--      <div class="justify-end flex flex-row gap-4 pt-5 pb-5 pl-5">-->
-          <h2 class="text-3xl font-medium text-black lg:px-20">Votre solde</h2>
+          <h2 class="text-xl font-semibold text-black lg:px-20">Votre solde</h2>
           <div class="flex flex-wrap w-full justify-between items-center lg:px-20">
             <!-- Solde du compte -->
             <div class="w-full md:w-[32.33333%] pb-4">
               <div class="bg-white rounded-lg p-4 h-full border">
                 <div class="flex items-center justify-between mb-4">
-                  <h3 class="text-lg font-semibold text-gray-700">Solde Disponible</h3>
+                  <h3 class="text-md font-roboto text-gray-700">Solde Disponible</h3>
                   <span class="text-blue-600">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </span>
                 </div>
-                <div class="text-2xl font-bold text-gray-900">{{ formatPrice(accountInfo.balance) }}</div>
-                <div class="text-sm text-gray-500 mt-2">Dernière recharge: {{ formatDate(accountInfo.lastRecharge) }}</div>
+                <div class="text-xl font-bold text-gray-950">{{ formatPrice(accountInfo.balance) }}</div>
+                <div class="text-xs font-roboto text-gray-500 mt-2">Dernière recharge: {{ formatDate(accountInfo.lastRecharge) }}</div>
               </div>
             </div>
 
@@ -30,15 +30,15 @@
             <div class="w-full md:w-[32.33333%] pb-4">
               <div class="bg-white rounded-lg p-4 h-full border">
                 <div class="flex items-center justify-between mb-4">
-                  <h3 class="text-lg font-semibold text-gray-700">Tarification</h3>
+                  <h3 class="text-md font-roboto text-gray-700">Tarification</h3>
                   <span class="text-green-600">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
               </svg>
             </span>
                 </div>
-                <div class="text-2xl font-bold text-gray-900">{{ formatPrice(accountInfo.pricing) }} / message</div>
-                <div class="text-sm text-gray-500 mt-2">Messages restants: {{ Math.floor(accountInfo.balance / accountInfo.pricing) }}</div>
+                <div class="text-xl font-bold text-gray-900">{{ formatPrice(accountInfo.pricing) }} / message</div>
+                <div class="text-xs font-roboto text-gray-500 mt-2">Messages restants: {{ Math.floor(accountInfo.balance / accountInfo.pricing) }}</div>
               </div>
             </div>
 
@@ -46,15 +46,15 @@
             <div class="w-full md:w-[32.33333%] pb-4">
               <div class="bg-white rounded-lg p-4 h-full border">
                 <div class="flex items-center justify-between mb-4">
-                  <h3 class="text-lg font-semibold text-gray-700">Montant déboursé</h3>
+                  <h3 class="text-md font-roboto text-gray-700">Montant déboursé</h3>
                   <span class="text-purple-600">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
             </span>
                 </div>
-                <div class="text-2xl font-bold text-gray-900">{{ formatPrice(accountInfo.ceiling) }}</div>
-                <div class="text-sm text-gray-500 mt-2">Utilisé depuis le:{{ formatDate(accountInfo.lastRecharge) }}</div>
+                <div class="text-xl font-bold text-gray-900">{{ formatPrice(accountInfo.ceiling) }}</div>
+                <div class="text-xs font-roboto text-gray-500 mt-2">Utilisé depuis le:{{ formatDate(accountInfo.lastRecharge) }}</div>
               </div>
             </div>
           </div>
@@ -62,71 +62,76 @@
         <div class="flex flex-wrap justify-between items-center my-4 border lg:mx-20">
         </div>
 
-        <h2 class="text-3xl font-medium text-black lg:px-20">Vos messages</h2>
+        <h2 class="text-xl font-semibold text-black lg:px-20">Vos messages</h2>
         <div class="flex flex-wrap justify-between mx-auto pb-4 lg:px-20">
           <div class="w-full md:w-[24%] pb-4">
             <div class="bg-white rounded-lg p-4 h-full border">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Messages envoyés</h3>
-            <div class="text-purple-600 bg-cyan-100 rounded-full h-16 w-16 flex items-center justify-center">
-  <!--            <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">-->
-  <!--              <path d="M17 0h-5.768a1 1 0 1 0 0 2h3.354L8.4 8.182A1.003 1.003 0 1 0 9.818 9.6L16 3.414v3.354a1 1 0 0 0 2 0V1a1 1 0 0 0-1-1Z"/>-->
-  <!--              <path d="m14.258 7.985-3.025 3.025A3 3 0 1 1 6.99 6.768l3.026-3.026A3.01 3.01 0 0 1 8.411 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V9.589a3.011 3.011 0 0 1-1.742-1.604Z"/>-->
-  <!--            </svg>-->
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                    d="M3 8L10.89 13.94C11.2187 14.1942 11.6049 14.3292 12 14.3292C12.3951 14.3292 12.7813 14.1942 13.11 13.94L21 8M5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19Z"
-                    stroke="#FE8317" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <path d="M21 5L12 14L3 5" stroke="#FE8317" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <h3 class="text-md font-roboto text-gray-700">Messages envoyés</h3>
+            <div class="text-purple-600 rounded-full h-16 w-16 flex items-center justify-center">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="currentColor"
+                    class="icon icon-tabler icons-tabler-filled icon-tabler-message text-green-500">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M18 3a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-4.724l-4.762 2.857a1 1 0 0 1 -1.508 -.743l-.006 -.114v-2h-1a4 4 0 0 1 -3.995 -3.8l-.005 -.2v-8a4 4 0 0 1 4 -4zm-4 9h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0 -2m2 -4h-8a1 1 0 1 0 0 2h8a1 1 0 0 0 0 -2" />
               </svg>
             </div>
               </div>
-              <div class="text-2xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
-              <div class="text-sm text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
+              <div class="text-xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
+              <div class="text-xs font-roboto text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
             </div>
           </div>
           <div class="w-full md:w-[24%] pb-4">
             <div class="bg-white rounded-lg p-4 h-full border">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Messages livrés</h3>
-            <div class="text-purple-600 bg-cyan-100 rounded-full h-16 w-16 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M1.5 12.5L7.5 18.5L15.5 6.5" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <h3 class="text-md font-roboto text-gray-700">Messages livrés</h3>
+            <div class="text-purple-600 rounded-full h-16 w-16 flex items-center justify-center">
+<!--              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">-->
+<!--                <path d="M1.5 12.5L7.5 18.5L15.5 6.5" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>-->
+<!--              </svg>-->
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"
+                    stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-checkbox text-green-500"><path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M9 11l3 3l8 -8" />
+                <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
               </svg>
             </div>
               </div>
-              <div class="text-2xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
-              <div class="text-sm text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
+              <div class="text-xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
+              <div class="text-xs font-roboto text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
             </div>
           </div>
           <div class="w-full md:w-[24%] pb-4">
             <div class="bg-white rounded-lg p-4 h-full border">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Messages lus</h3>
-            <div class="text-purple-600 bg-cyan-100 rounded-full h-16 w-16 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M1.5 12.5L7.5 18.5L15.5 6.5" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <path d="M6.5 12.5L12.5 18.5L20.5 6.5" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              </svg>
+                <h3 class="text-md font-roboto text-gray-700">Messages lus</h3>
+            <div class="text-purple-600 rounded-full h-16 w-16 flex items-center justify-center">
+<!--              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">-->
+<!--                <path d="M1.5 12.5L7.5 18.5L15.5 6.5" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>-->
+<!--                <path d="M6.5 12.5L12.5 18.5L20.5 6.5" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>-->
+<!--              </svg>-->
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="50"  height="50"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"
+                    stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-checks text-green-500"><path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M7 12l5 5l10 -10" /><path d="M2 12l5 5m5 -5l5 -5" /></svg>
             </div>
               </div>
-              <div class="text-2xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
-              <div class="text-sm text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
+              <div class="text-xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
+              <div class="text-xs font-roboto text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
             </div>
           </div>
           <div class="w-full md:w-[24%] pb-4">
             <div class="bg-white rounded-lg p-4 h-full border">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Echec</h3>
-            <div class="text-purple-600 bg-cyan-100 rounded-full h-16 w-16 flex items-center justify-center">
+                <h3 class="text-md font-roboto text-gray-700">Echec</h3>
+            <div class="text-purple-600 rounded-full h-16 w-16 flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" stroke="#F44336" stroke-width="2" fill="none"/>
                 <path d="M8 8L16 16M16 8L8 16" stroke="#F44336" stroke-width="2" stroke-linecap="round"/>
               </svg>
             </div>
               </div>
-              <div class="text-2xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
-              <div class="text-sm text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
+              <div class="text-xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
+              <div class="text-xs font-roboto text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
             </div>
           </div>
 
@@ -152,7 +157,7 @@
 
         <div class="flex flex-wrap w-full h-screen py-4 justify-between gap-4 lg:gap-0">
           <div class="rounded-lg w-full max-w-md border bg-white flex flex-col justify-between">
-          <h2 class="text-xl sm:text-2xl font-bold capitalize text-center sm:text-left p-10">Poucentage des echanges</h2>
+          <h2 class="text-xl font-semibold capitalize text-center sm:text-left p-10">Poucentage des echanges</h2>
             <!-- Légende -->
             <div class="flex flex-wrap gap-4 justify-center sm:justify-start m-5">
 
@@ -196,24 +201,24 @@
               <!-- En-tête -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 p-5 gap-4">
               <!-- Titre -->
-              <h2 class="text-xl sm:text-2xl font-bold capitalize text-center sm:text-left">Statistiques des échanges</h2>
+              <h2 class="text-xl font-semibold capitalize text-center sm:text-left">Statistiques des échanges</h2>
 
               <!-- Légende -->
               <div class="flex flex-wrap gap-4 justify-center sm:justify-start">
                 <!-- Envoyé -->
                 <div class="flex items-center gap-2 text-sm sm:text-base">
-                  <div class="w-4 h-4 bg-blue-600 rounded"></div>
+                  <div class="w-4 h-4 bg-orange-500 rounded"></div>
                   <span>Envoyé</span>
                 </div>
                 <!-- Reçu -->
                 <div class="flex items-center gap-2 text-sm sm:text-base">
-                  <div class="w-4 h-4 bg-sky-400 rounded"></div>
-                  <span>Reçu</span>
+                  <div class="w-4 h-4 bg-green-500 rounded"></div>
+                  <span>Livré</span>
                 </div>
                 <!-- Réponse -->
                 <div class="flex items-center gap-2 text-sm sm:text-base">
-                  <div class="w-4 h-4 bg-orange-500 rounded"></div>
-                  <span>Réponse</span>
+                  <div class="w-4 h-4 bg-red-600 rounded"></div>
+                  <span>Echec</span>
                 </div>
               </div>
             </div>
@@ -239,17 +244,17 @@
                 >
                   <!-- envoyés -->
                   <div
-                      class="w-[30%] sm:w-[20%] bg-blue-600"
+                      class="w-[30%] sm:w-[20%] bg-orange-500"
                       :style="{ height: calculateHeight(data.send) }"
                   ></div>
                   <!-- reçu -->
                   <div
-                      class="w-[30%] sm:w-[20%] bg-sky-400 -mt-[1px]"
+                      class="w-[30%] sm:w-[20%] bg-green-500 -mt-[1px]"
                       :style="{ height: calculateHeight(data.received) }"
                   ></div>
                   <!-- Réponse -->
                   <div
-                      class="w-[30%] sm:w-[20%] bg-orange-500 -mt-[1px]"
+                      class="w-[30%] sm:w-[20%] bg-red-600 -mt-[1px]"
                       :style="{ height: calculateHeight(data.response) }"
                   ></div>
                   <!-- Mois -->
