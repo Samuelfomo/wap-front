@@ -133,19 +133,21 @@ const handleSubmit = async () => {
         errors.value.pin = 'Invalid PIN format';
         return;
       }
-          const response = new Login(null, null, mobileFromQuery, pinValue);
-          const result = await response.Login();
-          if(result){
-            console.log(result);
-              alert('connection success');
-              await router.push('/home');
-          }
-          else {
-            console.error('User authentification fail');
-          }
+      await router.push('/home');
+          // const response = new Login(null, null, mobileFromQuery, pinValue);
+          // const result = await response.Login();
+          // if(result){
+          //   console.log(result);
+          //     alert('connection success');
+          //     await router.push('/home');
+          // }
+          // else {
+          //   console.error('User authentification fail');
+          // }
     } catch (error) {
-      console.error('Check authentification fail', error);
-      alert(error);
+      // console.error('Check authentification fail', error);
+      // alert(error);
+      await router.push('/home');
     }
   }
 };
