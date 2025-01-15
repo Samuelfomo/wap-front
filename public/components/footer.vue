@@ -1,8 +1,8 @@
 <template>
-  <footer class="bg-blue-600 p-6 text-white text-sm text-end w-full">
+  <footer class="bg-green-500 p-6 text-black border-t-2 text-sm text-end w-full justify-end flex flex-row lg:gap-20 gap-0">
     WAP © 2025 | All rights reserved |
-    <a href="#" class="text-green-500 hover:underline ml-4 mr-4">Terms of Service</a>
-    <a href="#" class="text-green-500 hover:underline">Privacy Policy</a>
+    <a href="#" class="text-white hover:underline ml-4 mr-4">Terms of Service</a>
+    <a href="#" class="text-white hover:underline">Privacy Policy</a>
   </footer>
 
 </template>

@@ -5,10 +5,10 @@
     <Header />
     <div class="flex-1 flex flex-col">
       <main class="flex-1 p-5 lg:p-10">
-        <div class="max-w-2xl mx-auto bg-black rounded-t-lg p-5 shadow-black shadow-sm">
+        <div class="max-w-2xl mx-auto bg-black rounded-t-lg p-5 shadow-gray-500 shadow-lg">
           <h2 class="text-xl font-roboto text-center text-white" >Envoyer un message</h2>
         </div>
-    <div class="max-w-2xl mx-auto bg-white p-6 rounded-b-lg shadow-black shadow-sm m-5 mt-0">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-b-lg shadow-gray-500 shadow-lg m-5 mt-0">
     <form @submit.prevent="sendMessage" class="space-y-6">
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">

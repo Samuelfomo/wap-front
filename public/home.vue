@@ -6,7 +6,7 @@
 
     <!-- Contenu principal -->
     <div class="flex-1 flex flex-col">
-      <main class="flex-1 p-5 lg:p-10 lg:pt-2 lg:m-5 md:m-0 sm:m-0">
+      <main class="flex-1 p-5 lg:p-10 lg:pt-2 lg:m-5 mb-10">
   <!--      <div class="justify-end flex flex-row gap-4 pt-5 pb-5 pl-5">-->
           <h2 class="text-3xl font-medium text-black lg:px-20">Votre solde</h2>
           <div class="flex flex-wrap w-full justify-between items-center lg:px-20">
@@ -151,7 +151,6 @@
         </div>
 
         <div class="flex flex-wrap w-full h-screen py-4 justify-between gap-4 lg:gap-0">
-  <!--        <div class="rounded-lg w-full max-w-md border bg-white">-->
           <div class="rounded-lg w-full max-w-md border bg-white flex flex-col justify-between">
           <h2 class="text-xl sm:text-2xl font-bold capitalize text-center sm:text-left p-10">Poucentage des echanges</h2>
             <!-- Légende -->
@@ -192,7 +191,7 @@
             </div>
           </div>
 
-          <div class="w-full max-w-3xl p-5 bg-white rounded-lg border">
+          <div class="w-full max-w-3xl p-5 lg:pb-5 pb-8 bg-white rounded-lg border">
   <!--        <div class="rounded-lg w-full max-w-3xl border bg-white p-5">-->
               <!-- En-tête -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 p-5 gap-4">
@@ -266,7 +265,9 @@
       </main>
 
       <!-- Footer -->
+      <div class="mt-5 w-full h-full">
       <Footer class="flex-shrink-0"/>
+      </div>
     </div>
 
   </div>
