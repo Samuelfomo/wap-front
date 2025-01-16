@@ -1,9 +1,9 @@
 <template>
-  <header class="bg-white p-5 lg:py-3 lg:px-10 flex justify-between items-center border-b-2 w-full flex-wrap">
+  <header class="bg-white p-5 lg:py-3 lg:px-10 flex justify-between items-center border-b-2 w-full flex-wrap" description="">
   <div class="text-xl font-bold text-blue-600">
     <img :src="logo" alt="Logo" class="lg:w-24 lg:h-8 w-16 h-6">
     </div>
-    <h1 class="lg:text-2xl font-bold uppercase">Welcome</h1>
+    <h1 class="lg:text-2xl font-bold uppercase">{{ description }}</h1>
     <div class="text-sm text-gray-700 flex relative">
       <div class="flex items-center space-x-2">
         <img @click="toggleDropdown" :src="avatar" alt="image" class="rounded-full border-2 border-green-500 lg:h-12 lg:w-12 h-6 w-6 cursor-pointer">
@@ -18,7 +18,7 @@
           <router-link to="/compte" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
             Compte
           </router-link>
-          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
+          <router-link to="/campagne" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
             Campagne
           </router-link>
           <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
@@ -62,7 +62,12 @@ const closeDropdown = (e) => {
     isDropdownOpen.value = false
   }
 }
-
+defineProps({
+  description: {
+    type: String,
+    required: true // or false depending on your needs
+  }
+});
 // Ajouter l'écouteur d'événement lors du montage du composant
 onMounted(() => {
   document.addEventListener('click', closeDropdown)

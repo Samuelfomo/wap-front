@@ -2,13 +2,13 @@
   <div class="flex flex-col min-h-screen bg-neutral-50">
 
     <!-- Header -->
-    <Header />
-
+    <Header description="Welcome" />
+    <Dashboard />
     <!-- Contenu principal -->
     <div class="flex-1 flex flex-col">
       <main class="flex-1 p-5 lg:p-10 lg:pt-2 lg:m-5 mb-10">
   <!--      <div class="justify-end flex flex-row gap-4 pt-5 pb-5 pl-5">-->
-          <h2 class="text-xl font-semibold text-black lg:px-20">Votre solde</h2>
+          <h1 class="text-2xl font-medium text-black lg:px-20 pb-2">Votre solde</h1>
           <div class="flex flex-wrap w-full justify-between items-center lg:px-20">
             <!-- Solde du compte -->
             <div class="w-full md:w-[32.33333%] pb-4">
@@ -22,7 +22,7 @@
             </span>
                 </div>
                 <div class="text-xl font-bold text-gray-950">{{ formatPrice(accountInfo.balance) }}</div>
-                <div class="text-xs font-roboto text-gray-500 mt-2">Dernière recharge: {{ formatDate(accountInfo.lastRecharge) }}</div>
+                <div class="text-xs font-roboto text-gray-500">Dernière recharge: {{ formatDate(accountInfo.lastRecharge) }}</div>
               </div>
             </div>
 
@@ -38,7 +38,7 @@
             </span>
                 </div>
                 <div class="text-xl font-bold text-gray-900">{{ formatPrice(accountInfo.pricing) }} / message</div>
-                <div class="text-xs font-roboto text-gray-500 mt-2">Messages restants: {{ Math.floor(accountInfo.balance / accountInfo.pricing) }}</div>
+                <div class="text-xs font-roboto text-gray-500">Messages restants: {{ Math.floor(accountInfo.balance / accountInfo.pricing) }}</div>
               </div>
             </div>
 
@@ -54,7 +54,7 @@
             </span>
                 </div>
                 <div class="text-xl font-bold text-gray-900">{{ formatPrice(accountInfo.ceiling) }}</div>
-                <div class="text-xs font-roboto text-gray-500 mt-2">Utilisé depuis le:{{ formatDate(accountInfo.lastRecharge) }}</div>
+                <div class="text-xs font-roboto text-gray-500">Utilisé depuis le:{{ formatDate(accountInfo.lastRecharge) }}</div>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
         <div class="flex flex-wrap justify-between items-center my-4 border lg:mx-20">
         </div>
 
-        <h2 class="text-xl font-semibold text-black lg:px-20">Vos messages</h2>
+        <h1 class="text-2xl font-medium  text-black lg:px-20 pb-5">Vos messages</h1>
         <div class="flex flex-wrap justify-between mx-auto pb-4 lg:px-20">
           <div class="w-full md:w-[24%] pb-4">
             <div class="bg-white rounded-lg p-4 h-full border">
@@ -77,7 +77,7 @@
             </div>
               </div>
               <div class="text-xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
-              <div class="text-xs font-roboto text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
+              <div class="text-xs font-roboto text-gray-500">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
             </div>
           </div>
           <div class="w-full md:w-[24%] pb-4">
@@ -97,7 +97,7 @@
             </div>
               </div>
               <div class="text-xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
-              <div class="text-xs font-roboto text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
+              <div class="text-xs font-roboto text-gray-500">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
             </div>
           </div>
           <div class="w-full md:w-[24%] pb-4">
@@ -116,14 +116,14 @@
             </div>
               </div>
               <div class="text-xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
-              <div class="text-xs font-roboto text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
+              <div class="text-xs font-roboto text-gray-500">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
             </div>
           </div>
           <div class="w-full md:w-[24%] pb-4">
             <div class="bg-white rounded-lg p-4 h-full border">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="text-md font-roboto text-gray-700">Echec</h3>
-            <div class="text-purple-600 rounded-full h-16 w-16 flex items-center justify-center">
+            <div class="text-purple-600 rounded-full h-12 w-12 flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" stroke="#F44336" stroke-width="2" fill="none"/>
                 <path d="M8 8L16 16M16 8L8 16" stroke="#F44336" stroke-width="2" stroke-linecap="round"/>
@@ -131,7 +131,7 @@
             </div>
               </div>
               <div class="text-xl font-bold text-gray-900">{{ accountInfo.usedThisMonth }} Messages</div>
-              <div class="text-xs font-roboto text-gray-500 mt-2">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
+              <div class="text-xs font-roboto text-gray-500">Depuis le: {{ formatDate(accountInfo.lastRecharge) }}</div>
             </div>
           </div>
 
@@ -284,6 +284,7 @@
 import { ref, onMounted } from 'vue'
 import Header from "./components/header.vue";
 import Footer from "./components/footer.vue";
+import Dashboard from "@public/components/dashboard.vue";
 
 // Données pour le graphique
 const Data = ref([

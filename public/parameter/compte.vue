@@ -7,6 +7,7 @@ import Header from "@public/components/header.vue";
 import Avatar from "@/assets/images/avatar.svg";
 import Lock from "@/assets/images/lock.svg";
 import Logout from "@/assets/images/logout.svg";
+import Dashboard from "@public/components/dashboard.vue";
 
 const router = useRouter();
 
@@ -21,7 +22,8 @@ const view = ref(true);
   <div class="flex flex-col min-h-screen bg-neutral-50">
 
     <!-- Header -->
-    <Header />
+    <Header description="compte" />
+    <Dashboard />
     <h1 class="font-bold text-2xl pt-8 lg:pl-20 pl-5">Espace compte</h1>
     <div class="flex min-h-screen">
       <main class="flex flex-wrap w-full gap-20 lg:gap-5 justify-between lg:px-20 px-5 py-10">

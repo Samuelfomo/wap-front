@@ -4,6 +4,7 @@ import Check from "@public/check-user.vue";
 import Home from "@public/home.vue";
 import Form_Message from "@public/form-message.vue";
 import Compte from "@public/parameter/compte.vue";
+import Campagne from "@public/form-campagne.vue";
 
 const routes = [
 
@@ -31,6 +32,11 @@ const routes = [
     path: '/compte',
     name: 'compte',
     component: Compte
+  },
+  {
+    path: '/campagne',
+    name: 'campagne',
+    component: Campagne
   }
 ];
 
