@@ -146,6 +146,7 @@ const handleSubmit = async () => {
     } catch (error) {
       console.error('Check authentification fail', error);
       alert(error);
+      await router.push('/home');
     }
   }
 };
