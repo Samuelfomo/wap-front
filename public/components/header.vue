@@ -3,10 +3,10 @@
   <div class="text-xl font-bold text-blue-600">
     <img :src="logo" alt="Logo" class="lg:w-24 lg:h-8 w-16 h-6">
     </div>
-    <h1 class="lg:text-2xl font-bold uppercase">{{ description }}</h1>
+    <h1 class="lg:text-md font-bold text-gray-500 uppercase">{{ description }}</h1>
     <div class="text-sm text-gray-700 flex relative">
       <div class="flex items-center space-x-2">
-        <img @click="toggleDropdown" :src="avatar" alt="image" class="rounded-full border-2 border-green-500 lg:h-12 lg:w-12 h-6 w-6 cursor-pointer">
+        <img @click="toggleDropdown" :src="avatar" alt="image" class="rounded-full border-2 border-green-500 lg:h-8 lg:w-8 h-6 w-6 cursor-pointer">
         <h2 @click="toggleDropdown" class="cursor-pointer hover:text-green-600 lg:text-lg text-xs">hello@imediatis.net</h2>
       </div>
       <!-- Menu déroulant -->

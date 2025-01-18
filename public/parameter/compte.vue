@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted} from "vue";
+import {ref} from "vue";
 
 import Footer from "@public/components/footer.vue";
 import Header from "@public/components/header.vue";
@@ -24,7 +24,33 @@ const lock = Lock;
 const logout = Logout;
 const recharge = Recharge;
 const view = ref(true);
-
+const modify = ref(false);
+const resetPass = ref(false);
+const reload = ref(false);
+const profil = () => {
+  view.value = true
+  modify.value = false
+  resetPass.value = false
+  reload.value = false
+}
+const modif = () => {
+  view.value = false
+  modify.value = true
+  resetPass.value = false
+  reload.value = false
+}
+const reset = () => {
+  view.value = false
+  modify.value = false
+  resetPass.value = true
+  reload.value = false
+}
+const relo = () => {
+  view.value = false
+  modify.value = false
+  resetPass.value = false
+  reload.value = true
+}
 </script>
 
 <template>
@@ -48,28 +74,27 @@ const view = ref(true);
             <h3 class="text-md font-medium text-gray-500 capitalize">mon numero de compte</h3>
           </div>
 
-
           <div class="shadow bg-white my-5 ">
             <div class="flex flex-col justify-center items-start mx-auto px-2 py-5">
-              <div class="flex items-center capitalize text-md font-roboto text-green-500 p-5 space-x-2 cursor-pointer"  @click="router.push('/compte')">
+              <div class="flex items-center capitalize text-md font-roboto text-green-500 p-5 space-x-2 cursor-pointer"  @click="profil">
                 <div class="rounded-full flex justify-center items-center h-6 w-6 bg-green-500 border">
                   <img :src="avatar" alt="image" class="h-4 w-4">
                 </div>
                 <span>Mon profil</span>
               </div>
-              <div class="flex items-center capitalize text-md font-roboto text-black p-5 pt-0 space-x-2 cursor-pointer">
+              <div class="flex items-center capitalize text-md font-roboto text-black p-5 pt-0 space-x-2 cursor-pointer" @click="modif">
                 <div class="rounded-full flex justify-center items-center h-6 w-6 border">
                   <img :src="avatar" alt="image" class="h-4 w-4">
                 </div>
                 <span>modifier le profil</span>
               </div>
-              <div class="flex items-center capitalize text-md font-roboto text-black p-5 pt-0 space-x-2 cursor-pointer">
+              <div class="flex items-center capitalize text-md font-roboto text-black p-5 pt-0 space-x-2 cursor-pointer" @click="reset">
                 <div class="rounded-full flex justify-center items-center h-6 w-6 border">
                   <img :src="lock" alt="image" class="h-4 w-4">
                 </div>
                 <span>réinitialiser le mot de passe</span>
               </div>
-              <div class="flex items-center capitalize text-md font-roboto text-black p-5 pt-0 space-x-2 cursor-pointer">
+              <div class="flex items-center capitalize text-md font-roboto text-black p-5 pt-0 space-x-2 cursor-pointer" @click="relo">
                 <div class="rounded-full flex justify-center items-center h-6 w-6 border">
                   <img :src="recharge" alt="image" class="h-4 w-4">
                 </div>
@@ -86,7 +111,31 @@ const view = ref(true);
         </div>
 
         <div class="w-full max-w-[860px] bg-white rounded-lg p-5 shadow mt-6 flex flex-col gap-5 justify-between" v-if="view">
-          <h2 class="font-roboto text-xl">Mon profil</h2>
+          <h2 class="font-roboto text-xl capitalize">Mon profil</h2>
+          <div class="w-full  h-full max-h-20 border">John</div>
+          <div class="w-full  h-full max-h-20 border">Kalvin</div>
+          <div class="w-full  h-full max-h-20 border"></div>
+          <div class="w-full  h-full max-h-20 border"></div>
+          <div class="w-full  h-full max-h-20 border"></div>
+        </div>
+        <div class="w-full max-w-[860px] bg-white rounded-lg p-5 shadow mt-6 flex flex-col gap-5 justify-between" v-if="modify">
+          <h2 class="font-roboto text-xl capitalize">Modifier mon profil</h2>
+          <div class="w-full  h-full max-h-20 border">John</div>
+          <div class="w-full  h-full max-h-20 border">Kalvin</div>
+          <div class="w-full  h-full max-h-20 border"></div>
+          <div class="w-full  h-full max-h-20 border"></div>
+          <div class="w-full  h-full max-h-20 border"></div>
+        </div>
+        <div class="w-full max-w-[860px] bg-white rounded-lg p-5 shadow mt-6 flex flex-col gap-5 justify-between" v-if="resetPass">
+          <h2 class="font-roboto text-xl capitalize">réinitialiser mon mot de passe</h2>
+          <div class="w-full  h-full max-h-20 border">John</div>
+          <div class="w-full  h-full max-h-20 border">Kalvin</div>
+          <div class="w-full  h-full max-h-20 border"></div>
+          <div class="w-full  h-full max-h-20 border"></div>
+          <div class="w-full  h-full max-h-20 border"></div>
+        </div>
+        <div class="w-full max-w-[860px] bg-white rounded-lg p-5 shadow mt-6 flex flex-col gap-5 justify-between" v-if="reload">
+          <h2 class="font-roboto text-xl capitalize">recharger mon compte</h2>
           <div class="w-full  h-full max-h-20 border">John</div>
           <div class="w-full  h-full max-h-20 border">Kalvin</div>
           <div class="w-full  h-full max-h-20 border"></div>
