@@ -5,6 +5,7 @@ import Home from "@public/home.vue";
 import Form_Message from "@public/form-message.vue";
 import Compte from "@public/parameter/compte.vue";
 import Campagne from "@public/form-campagne.vue";
+import Chart from "@public/chart.vue";
 
 const routes = [
 
@@ -14,7 +15,7 @@ const routes = [
     component: Check
   },
   {
-    path: '/login?',
+    path: '/:login?',
     name: 'login',
     component: Login
   },
@@ -28,7 +29,7 @@ const routes = [
     name: 'message',
     component: Form_Message
   },
-  {
+  { 
     path: '/compte',
     name: 'compte',
     component: Compte
@@ -37,6 +38,11 @@ const routes = [
     path: '/campagne',
     name: 'campagne',
     component: Campagne
+  },
+  {
+    path: '/chart',
+    name: 'chart',
+    component: Chart
   }
 ];
 

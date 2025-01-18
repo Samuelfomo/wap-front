@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white p-5 lg:py-3 lg:px-10 flex justify-between items-center border-b-2 w-full flex-wrap" description="">
+  <header class="bg-white p-5 lg:py-3 lg:px-10 flex justify-between items-center border-b-2 border-t-2 border-t-green-400 w-full flex-wrap" description="">
   <div class="text-xl font-bold text-blue-600">
     <img :src="logo" alt="Logo" class="lg:w-24 lg:h-8 w-16 h-6">
     </div>
@@ -10,27 +10,41 @@
         <h2 @click="toggleDropdown" class="cursor-pointer hover:text-green-600 lg:text-lg text-xs">hello@imediatis.net</h2>
       </div>
       <!-- Menu déroulant -->
-      <div v-if="isDropdownOpen" class="absolute right-0 mt-16 w-48 bg-white rounded-md shadow-lg border">
+      <div v-if="isDropdownOpen" class="absolute right-0 mt-16 w-full bg-white rounded-md shadow-lg border">
         <div class="py-1">
-          <router-link to="/home" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
+          <router-link to="/home" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                       :class="[$route.name === 'home' ? activeClass : inactiveClass]"
+          >
             Home
           </router-link>
-          <router-link to="/compte" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
+          <router-link to="/compte" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                       :class="[$route.name === 'compte' ? activeClass : inactiveClass]"
+          >
             Compte
           </router-link>
-          <router-link to="/campagne" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
+          <router-link to="/campagne" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                       :class="[$route.name === 'campagne' ? activeClass : inactiveClass]"
+          >
             Campagne
           </router-link>
-          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
+          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                       :class="[$route.name === 'prospect' ? activeClass : inactiveClass]"
+          >
             Prospect
           </router-link>
-          <router-link to="/form-message" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
+          <router-link to="/form-message" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                       :class="[$route.name === 'message' ? activeClass : inactiveClass]"
+          >
             Message
           </router-link>
-          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
+          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                       :class="[$route.name === 'historique' ? activeClass : inactiveClass]"
+          >
             Historique
           </router-link>
-          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100">
+          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                       :class="[$route.name === 'support' ? activeClass : inactiveClass]"
+          >
             Support & Aide
           </router-link>
           <button @click="logout" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-green-100">
@@ -55,6 +69,13 @@ const isDropdownOpen = ref(false)
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
 }
+
+const activeClass = ref(
+    'bg-green-100',
+)
+const inactiveClass = ref(
+    '',
+)
 
 // Fermer le menu si on clique en dehors
 const closeDropdown = (e) => {

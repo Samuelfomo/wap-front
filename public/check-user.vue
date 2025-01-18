@@ -72,7 +72,7 @@ const handleSubmit = async () => {
   }
   if (!errors.value.mobile) {
     const mobileData = mobile.value.replace(/\s+/g, '');
-    console.log('mobile send is:', Number(mobileData))
+    console.log('account number send is:', Number(mobileData))
     try {
       const response = new Login(
           null,
@@ -80,7 +80,8 @@ const handleSubmit = async () => {
           Number(mobileData),
           null
       )
-    const valid = await response.Mobile_validator();
+    // const valid = await response.Mobile_validator();
+      const valid = response.ACCOUNT_validator();
       console.log("verify mobile account is :", valid);
       if(valid){
         console.log('mobile value', mobile.value)

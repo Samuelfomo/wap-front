@@ -63,6 +63,7 @@ import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue'
 
 import {Login} from "@/class/Login";
+import { useLoginStore } from '@/stores/loginStore'
 
 const router = useRouter();
 const route = useRoute();
@@ -78,7 +79,6 @@ const errors = ref({
 });
 
 const handlepinInput = (index: number) => {
-
   if (pin.value[index].length === 1 && index < pin.value.length - 1)
   {
     // Passer automatiquement au champ suivant
@@ -115,41 +115,89 @@ const handleSubmit = async () => {
     return false;
   })) {
     errors.value.pin = 'Please complete all fields.';
-
     setTimeout(() => {
       errors.value.pin = '';
     }, 1000);
-
     return;
+
   } else {
     errors.value.pin = '';
     const pinValue = Number(pin.value.join('').replace(/\s+/g, '').trim());
     try {
       const pinvalid = new Login(null, null, null, pinValue);
-
       console.log('pin send is:', pinValue)
-      const isPinValid = await pinvalid.PIN_validator();
+      const isPinValid = pinvalid.PIN_validator();
       if (!isPinValid) {
         errors.value.pin = 'Invalid PIN format';
         return;
       }
-          const response = new Login(null, null, mobileFromQuery, pinValue);
-          const result = await response.Login();
-          if(result){
-            console.log(result);
-              alert('connection success');
-              await router.push('/home');
-          }
-          else {
-            console.error('User authentification fail');
-          }
+
+      const response = new Login(null, null, mobileFromQuery, pinValue);
+      const result = await response.Login();
+      if(result) {
+        const loginStore = useLoginStore();
+        loginStore.setUserData({
+          mobile: result.mobile,
+          guid: result.guid
+        })
+        // loginStore.setUserData(result);
+
+        await router.push({ name: 'home' });
+      }
     } catch (error) {
       console.error('Check authentification fail', error);
       alert(error);
-      await router.push('/home');
     }
   }
 };
+// const handleSubmit = async () => {
+//   if (pin.value.some((digit, index) => {
+//     const cleanedDigit = digit.replace(/\s+/g, '').trim();
+//     if (cleanedDigit === '') {
+//       // Efface le champ vide
+//       pin.value[index] = '';
+//       return true;
+//     }
+//     return false;
+//   })) {
+//     errors.value.pin = 'Please complete all fields.';
+//
+//     setTimeout(() => {
+//       errors.value.pin = '';
+//     }, 1000);
+//
+//     return;
+//   } else {
+//     errors.value.pin = '';
+//     const pinValue = Number(pin.value.join('').replace(/\s+/g, '').trim());
+//     try {
+//       const pinvalid = new Login(null, null, null, pinValue);
+//
+//       console.log('pin send is:', pinValue)
+//       const isPinValid = pinvalid.PIN_validator();
+//       if (!isPinValid) {
+//         errors.value.pin = 'Invalid PIN format';
+//         return;
+//       }
+//           const response = new Login(null, null, mobileFromQuery, pinValue);
+//           const result = await response.Login();
+//           if(result){
+//             console.log(result.mobile.toString());
+//               alert('connection success');
+//               await router.push({
+//                 name:'home',
+//                 query: { data: JSON.stringify(result)   }
+//               });
+//           }
+//           else {
+//             console.error('User authentification fail');
+//           }
+//     } catch (error) {
+//       console.error('Check authentification fail', error);
+//       alert(error);
+//     }
+//   }
+// };
 
 
 

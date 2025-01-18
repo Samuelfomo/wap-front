@@ -1,19 +1,28 @@
 <script setup>
-import {ref} from "vue";
-import {useRouter} from "vue-router";
+import {ref, onMounted} from "vue";
 
 import Footer from "@public/components/footer.vue";
 import Header from "@public/components/header.vue";
 import Avatar from "@/assets/images/avatar.svg";
 import Lock from "@/assets/images/lock.svg";
 import Logout from "@/assets/images/logout.svg";
+import Recharge from "@/assets/images/recharge.svg";
+
 import Dashboard from "@public/components/dashboard.vue";
 
-const router = useRouter();
+import { useLoginStore } from '@/stores/loginStore'
+import { storeToRefs } from 'pinia'
+// import {data} from "autoprefixer";
+
+const store = useLoginStore()
+// Utiliser storeToRefs pour préserver la réactivité
+const { mobile, guid, isLoggedIn } = storeToRefs(store)
+console.log("data received is :",  mobile.value, guid.value, isLoggedIn.value );
 
 const avatar = Avatar;
 const lock = Lock;
 const logout = Logout;
+const recharge = Recharge;
 const view = ref(true);
 
 </script>
@@ -59,6 +68,12 @@ const view = ref(true);
                   <img :src="lock" alt="image" class="h-4 w-4">
                 </div>
                 <span>réinitialiser le mot de passe</span>
+              </div>
+              <div class="flex items-center capitalize text-md font-roboto text-black p-5 pt-0 space-x-2 cursor-pointer">
+                <div class="rounded-full flex justify-center items-center h-6 w-6 border">
+                  <img :src="recharge" alt="image" class="h-4 w-4">
+                </div>
+                <span>recharger mon compte</span>
               </div>
               <div class="flex items-center capitalize text-md font-roboto text-black p-5 pt-0 space-x-2 cursor-pointer hover:text-red-600">
                 <div class="rounded-full flex justify-center items-center h-6 w-6 border">

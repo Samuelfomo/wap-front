@@ -155,44 +155,45 @@
         <div class="flex flex-wrap w-full justify-between items-center mb-4 border">
         </div>
 
-        <div class="flex flex-wrap w-full h-screen py-4 justify-between gap-4 lg:gap-0">
-          <div class="rounded-lg w-full max-w-md border bg-white flex flex-col justify-between">
+        <div class="flex flex-wrap w-full py-4 justify-between gap-4 lg:gap-0">
+          <div class="rounded-lg w-full min-h-screen max-w-md border bg-white flex flex-col justify-between">
           <h2 class="text-xl font-semibold capitalize text-center sm:text-left p-10">Poucentage des echanges</h2>
+            <div class="py-6" id="pie-chart"></div>
             <!-- Légende -->
             <div class="flex flex-wrap gap-4 justify-center sm:justify-start m-5">
 
-              <!-- Envoyé -->
-              <div class="flex flex-col items-end sm:text-base">
-                <div class="flex items-center gap-2">
-                  <div class="w-4 h-4 bg-orange-500 rounded-full"></div>
-                  <span class="text-xl">56%</span>
-                </div>
-                <span class="text-xs text-gray-400 float-end">Envoyé</span>
-              </div>
-              <!-- Livré -->
-              <div class="flex flex-col items-end sm:text-base">
-                <div class="flex items-center gap-2">
-                  <div class="w-4 h-4 bg-green-500 rounded-full"></div>
-                  <span class="text-xl">50%</span>
-                </div>
-                <span class="text-xs text-gray-400 float-end">Livré</span>
-              </div>
-              <!-- Lu -->
-              <div class="flex flex-col items-end sm:text-base">
-                <div class="flex items-center gap-2">
-                  <div class="w-4 h-4 bg-green-600 rounded-full"></div>
-                  <span class="text-xl">45%</span>
-                </div>
-                <span class="text-xs text-gray-400 float-end">Lu</span>
-              </div>
-              <!-- Échec -->
-              <div class="flex flex-col items-end sm:text-base">
-                <div class="flex items-center gap-2">
-                  <div class="w-4 h-4 bg-red-600 rounded-full"></div>
-                  <span class="text-xl">6%</span>
-                </div>
-                <span class="text-xs text-gray-400 float-end">Échec</span>
-              </div>
+<!--              &lt;!&ndash; Envoyé &ndash;&gt;-->
+<!--              <div class="flex flex-col items-end sm:text-base">-->
+<!--                <div class="flex items-center gap-2">-->
+<!--                  <div class="w-4 h-4 bg-orange-500 rounded-full"></div>-->
+<!--                  <span class="text-xl">56%</span>-->
+<!--                </div>-->
+<!--                <span class="text-xs text-gray-400 float-end">Envoyé</span>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; Livré &ndash;&gt;-->
+<!--              <div class="flex flex-col items-end sm:text-base">-->
+<!--                <div class="flex items-center gap-2">-->
+<!--                  <div class="w-4 h-4 bg-green-500 rounded-full"></div>-->
+<!--                  <span class="text-xl">50%</span>-->
+<!--                </div>-->
+<!--                <span class="text-xs text-gray-400 float-end">Livré</span>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; Lu &ndash;&gt;-->
+<!--              <div class="flex flex-col items-end sm:text-base">-->
+<!--                <div class="flex items-center gap-2">-->
+<!--                  <div class="w-4 h-4 bg-green-600 rounded-full"></div>-->
+<!--                  <span class="text-xl">45%</span>-->
+<!--                </div>-->
+<!--                <span class="text-xs text-gray-400 float-end">Lu</span>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; Échec &ndash;&gt;-->
+<!--              <div class="flex flex-col items-end sm:text-base">-->
+<!--                <div class="flex items-center gap-2">-->
+<!--                  <div class="w-4 h-4 bg-red-600 rounded-full"></div>-->
+<!--                  <span class="text-xl">6%</span>-->
+<!--                </div>-->
+<!--                <span class="text-xs text-gray-400 float-end">Échec</span>-->
+<!--              </div>-->
             </div>
           </div>
 
@@ -281,10 +282,89 @@
 
 <script setup>
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import Header from "./components/header.vue";
 import Footer from "./components/footer.vue";
 import Dashboard from "@public/components/dashboard.vue";
+// import {useRoute, useRouter} from "vue-router";
+import { useLoginStore } from '@/stores/loginStore'
+import { storeToRefs } from 'pinia'
+
+const store = useLoginStore()
+// Utiliser storeToRefs pour préserver la réactivité
+const { mobile, guid, isLoggedIn } = storeToRefs(store)
+
+console.log('mobile user', mobile.value,'guid send', guid.value, isLoggedIn.value);
+
+// const route = useRoute();
+// const router = useRouter();
+
+const chart = ref(null)
+// const mobile = route.query.data;
+// console.log('data value ', mobile)
+// // await router.push({
+// //   name:'compte',
+// //   query: { mobile: route.query.mobile  }
+// // });
+
+const getChartOptions = () => {
+  return {
+    series: [52.8, 36.8, 30.4, 6.4],
+    colors: ["#FF870E", "#50D662", "#52BB60", "#F43A3A"],
+    chart: {
+      height: 420,
+      width: "100%",
+      type: "pie",
+    },
+    stroke: {
+      colors: ["white"],
+      lineCap: "",
+      border:["black"]
+    },
+    plotOptions: {
+      pie: {
+        labels: {
+          show: true,
+        },
+        size: "100%",
+        dataLabels: {
+          offset: -25
+        }
+      },
+    },
+    labels: ["Envoyé", "Livré", "Lu",'Échec'],
+    dataLabels: {
+      enabled: true,
+      style: {
+        fontFamily: "Inter, sans-serif",
+      },
+    },
+    legend: {
+      position: "bottom",
+      fontFamily: "Inter, sans-serif",
+    },
+    yaxis: {
+      labels: {
+        formatter: function (value) {
+          return value + "%"
+        },
+      },
+    },
+    xaxis: {
+      labels: {
+        formatter: function (value) {
+          return value + "%"
+        },
+      },
+      axisTicks: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      },
+    },
+  }
+}
 
 // Données pour le graphique
 const Data = ref([
@@ -307,14 +387,27 @@ const maxValue = ref(0)
 onMounted(() => {
   maxValue.value = Math.max(...Data.value.map(data =>
       data.send + data.received + data.response
-  ))
-})
+  ));
+
+
+  if (typeof ApexCharts !== 'undefined') {
+    chart.value = new ApexCharts(document.getElementById("pie-chart"), getChartOptions())
+    chart.value.render()
+  } else {
+    console.error("ApexCharts n'est pas chargé")
+  }
+});
+onBeforeUnmount(() => {
+  if (chart.value) {
+    chart.value.destroy()
+  }
+});
 
 // Fonction pour calculer la hauteur des barres
 const calculateHeight = (value) => {
 
   const result = `${(value / maxValue.value) * 400}px`
-  console.log(result);
+  // console.log(result);
   return result;
 }
 
