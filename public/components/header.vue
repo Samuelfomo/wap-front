@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white p-5 lg:py-3 lg:px-10 flex justify-between items-center border-b-2 border-t-2 border-t-green-400 w-full flex-wrap" description="">
+  <header class="bg-white p-5 lg:py-3 lg:px-10 flex justify-between items-center border-b border-t-2 border-b-green-400 w-full flex-wrap" description="">
   <div class="text-xl font-bold text-blue-600">
     <img :src="logo" alt="Logo" class="lg:w-24 lg:h-8 w-16 h-6">
     </div>
