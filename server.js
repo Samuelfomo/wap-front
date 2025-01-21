@@ -4,16 +4,16 @@ const cors = require('cors');
 const Login = require('./src-services/routes/login')
 
 const app = express();
-const port = process.env.PORT || 3002;
-const host = process.env.HOST || 'http://localhost';
+const port = process.env.PORT || 3003;
+const host = process.env.HOST || 'http://192.168.100.103';
 
-// app.use(cors());
-app.use(cors({
-  origin: ['http://localhost:5173'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors());
+// app.use(cors({
+//   origin: ['http://localhost:5173'],
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   credentials: true,
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }));
 
 app.use(express.json());
 

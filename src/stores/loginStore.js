@@ -25,14 +25,51 @@ export const useLoginStore = defineStore('login', {
     },
 
     actions: {
+
         setUserData(data) {
             try {
-                this.userData = data
-                localStorage.setItem('userData', JSON.stringify(data))
+                // Ajouter une date d'expiration (par exemple, 24h)
+                const expiresAt = new Date().getTime() + (24 * 60 * 60 * 1000);
+                const dataWithExpiration = {
+                    ...data,
+                    expiresAt
+                };
+
+                this.userData = data;
+                localStorage.setItem('userData', JSON.stringify(dataWithExpiration));
             } catch (error) {
-                console.error('Error saving userData to localStorage:', error)
+                console.error('Error saving userData to localStorage:', error);
             }
         },
+
+        checkSession() {
+            try {
+                const savedData = localStorage.getItem('userData');
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    const now = new Date().getTime();
+
+                    // Vérifier si la session a expiré
+                    if (data.expiresAt && now > data.expiresAt) {
+                        this.clearUserData();
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            } catch (error) {
+                console.error('Error checking session:', error);
+                return false;
+            }
+        },
+        // setUserData(data) {
+        //     try {
+        //         this.userData = data
+        //         localStorage.setItem('userData', JSON.stringify(data))
+        //     } catch (error) {
+        //         console.error('Error saving userData to localStorage:', error)
+        //     }
+        // },
 
         clearUserData() {
             try {
@@ -52,6 +89,22 @@ export const useLoginStore = defineStore('login', {
                 }
             } catch (error) {
                 console.error('Error loading userData from localStorage:', error)
+            }
+        },
+
+        async logout() {
+            try {
+                // 1. Appel API de déconnexion (si nécessaire)
+                // await api.logout();  // Décommentez si vous avez un endpoint de logout
+
+                // 2. Nettoyer les données locales
+                this.clearUserData();
+
+                // 3. Retourner true pour indiquer le succès
+                return true;
+            } catch (error) {
+                console.error('Erreur lors de la déconnexion:', error);
+                return false;
             }
         }
     }

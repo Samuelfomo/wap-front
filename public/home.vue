@@ -2,8 +2,8 @@
   <div class="flex flex-col min-h-screen bg-neutral-50">
 
     <!-- Header -->
-    <Header description="Welcome" />
-    <Dashboard />
+    <Header description="Welcome"/>
+    <Dashboard/>
     <!-- Contenu principal -->
     <div class="flex-1 flex flex-col">
       <main class="flex-1 p-5 lg:p-10 lg:pt-2 lg:m-5 mb-10">
@@ -11,15 +11,31 @@
           <h1 class="text-2xl font-medium text-black lg:px-20 pb-2">Votre solde</h1>
           <div class="flex flex-wrap w-full justify-between items-center lg:px-20">
             <!-- Solde du compte -->
+            <div class="w-full md:w-[32.33333%] pb-4 hidden">
+              <div class="bg-white rounded-t-lg px-4 pt-4 pb-2 h-full border-t shadow">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-md font-roboto text-gray-700">Solde Disponible</h3>
+                  <span class="text-blue-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  </span>
+                </div>
+              </div>
+              <div class="bg-gray-200 rounded-b-lg px-4 pt-2 pb-4 h-full border-b shadow">
+                <div class="text-xl font-bold text-gray-950">{{ formatPrice(accountInfo.balance) }}</div>
+                <div class="text-xs font-roboto text-gray-500">Dernière recharge: {{ formatDate(accountInfo.lastRecharge) }}</div>
+              </div>
+            </div>
             <div class="w-full md:w-[32.33333%] pb-4">
               <div class="bg-white rounded-lg p-4 h-full border">
                 <div class="flex items-center justify-between mb-4">
                   <h3 class="text-md font-roboto text-gray-700">Solde Disponible</h3>
-                  <span class="text-blue-600">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </span>
+                  <span class="text-purple-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </span>
                 </div>
                 <div class="text-xl font-bold text-gray-950">{{ formatPrice(accountInfo.balance) }}</div>
                 <div class="text-xs font-roboto text-gray-500">Dernière recharge: {{ formatDate(accountInfo.lastRecharge) }}</div>
@@ -27,11 +43,27 @@
             </div>
 
             <!-- Tarification -->
+            <div class="w-full md:w-[32.33333%] pb-4 hidden">
+              <div class="bg-white rounded-t-lg px-4 pt-4 pb-2 h-full border-t shadow">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-md font-roboto text-gray-700">Tarification</h3>
+                  <span class="text-green-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </span>
+                </div>
+              </div>
+              <div class="bg-gray-200 rounded-b-lg px-4 pt-2 pb-4 h-full border-b shadow">
+                <div class="text-xl font-bold text-gray-900">{{ formatPrice(accountInfo.pricing) }} / message</div>
+                <div class="text-xs font-roboto text-gray-500">Messages restants: {{ Math.floor(accountInfo.balance / accountInfo.pricing) }}</div>
+              </div>
+            </div>
             <div class="w-full md:w-[32.33333%] pb-4">
               <div class="bg-white rounded-lg p-4 h-full border">
                 <div class="flex items-center justify-between mb-4">
                   <h3 class="text-md font-roboto text-gray-700">Tarification</h3>
-                  <span class="text-green-600">
+                  <span class="text-purple-600">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
               </svg>
@@ -43,6 +75,22 @@
             </div>
 
             <!-- depense -->
+            <div class="w-full md:w-[32.33333%] pb-4 hidden">
+              <div class="bg-white rounded-t-lg px-4 pt-4 pb-2 h-full border-t shadow">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-md font-roboto text-gray-700">Montant déboursé</h3>
+                  <span class="text-purple-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </span>
+                </div>
+              </div>
+              <div class="bg-gray-200 rounded-b-lg px-4 pt-2 pb-4 h-full border-b shadow">
+                <div class="text-xl font-bold text-gray-900">{{ formatPrice(accountInfo.ceiling) }}</div>
+                <div class="text-xs font-roboto text-gray-500">Utilisé depuis le:{{ formatDate(accountInfo.lastRecharge) }}</div>
+              </div>
+            </div>
             <div class="w-full md:w-[32.33333%] pb-4">
               <div class="bg-white rounded-lg p-4 h-full border">
                 <div class="flex items-center justify-between mb-4">

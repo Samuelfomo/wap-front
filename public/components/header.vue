@@ -7,47 +7,50 @@
     <div class="text-sm text-gray-700 flex relative">
       <div class="flex items-center space-x-2">
         <img @click="toggleDropdown" :src="avatar" alt="image" class="rounded-full border-2 border-green-500 lg:h-8 lg:w-8 h-6 w-6 cursor-pointer">
-        <h2 @click="toggleDropdown" class="cursor-pointer hover:text-green-600 lg:text-lg text-xs">hello@imediatis.net</h2>
+        <h2 @click="toggleDropdown" class="cursor-pointer hover:text-green-600 lg:text-lg text-xs">Rasland Arnold<select>
+        </select></h2>
       </div>
+
       <!-- Menu déroulant -->
       <div v-if="isDropdownOpen" class="absolute right-0 mt-16 w-full bg-white rounded-md shadow-lg border">
         <div class="py-1">
           <router-link to="/home" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
                        :class="[$route.name === 'home' ? activeClass : inactiveClass]"
           >
-            Home
-          </router-link>
-          <router-link to="/compte" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
-                       :class="[$route.name === 'compte' ? activeClass : inactiveClass]"
-          >
-            Compte
+            Accueil
           </router-link>
           <router-link to="/campagne" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
                        :class="[$route.name === 'campagne' ? activeClass : inactiveClass]"
           >
             Campagne
           </router-link>
-          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
-                       :class="[$route.name === 'prospect' ? activeClass : inactiveClass]"
+          <router-link to="/service" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                       :class="[$route.name === 'service' ? activeClass : inactiveClass]"
           >
-            Prospect
+            Service
           </router-link>
-          <router-link to="/form-message" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
-                       :class="[$route.name === 'message' ? activeClass : inactiveClass]"
+
+          <router-link to="/contact" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                       :class="[$route.name === 'contact' ? activeClass : inactiveClass]"
           >
-            Message
+            Contacts
           </router-link>
-          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
-                       :class="[$route.name === 'historique' ? activeClass : inactiveClass]"
+          <router-link to="/compte" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
+                       :class="[$route.name === 'compte' ? activeClass : inactiveClass]"
           >
-            Historique
+            Recharge
           </router-link>
-          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100"
-                       :class="[$route.name === 'support' ? activeClass : inactiveClass]"
-          >
-            Support & Aide
-          </router-link>
-          <button @click="logout" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-green-100">
+<!--          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100"-->
+<!--                       :class="[$route.name === 'historique' ? activeClass : inactiveClass]"-->
+<!--          >-->
+<!--            Historique-->
+<!--          </router-link>-->
+<!--          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100"-->
+<!--                       :class="[$route.name === 'support' ? activeClass : inactiveClass]"-->
+<!--          >-->
+<!--            Support & Aide-->
+<!--          </router-link>-->
+          <button @click="handleLogout" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-green-100">
             Déconnexion
           </button>
         </div>
@@ -58,9 +61,15 @@
 </template>
 
 <script setup>
-import {onMounted, onUnmounted, ref} from 'vue'
-import Logo from "@/assets/images/logo-wap.svg"
-import Avatar from "@/assets/images/avatar.svg"
+import {onMounted, onUnmounted, ref} from 'vue';
+import Logo from "@/assets/images/logo-wap.svg";
+import Avatar from "@/assets/images/avatar.svg";
+
+import { useLoginStore } from '@/stores/loginStore';
+import {useRouter} from "vue-router";
+
+const router = useRouter()
+const store = useLoginStore()
 
 const logo = ref(Logo)
 const avatar = ref(Avatar)
@@ -99,8 +108,16 @@ onUnmounted(() => {
   document.removeEventListener('click', closeDropdown)
 })
 
-const logout = () => {
-  // Ajoutez ici votre logique de déconnexion
-  console.log('Déconnexion...')
-}
+const handleLogout = async () => {
+  try {
+    // Appel API pour la déconnexion
+    console.log('Déconnexion');
+    const success = await store.logout();
+    if (success){
+      await router.push('/');
+    }
+  } catch (error) {
+    console.error('Erreur lors de la déconnexion:', error);
+  }
+};
 </script>

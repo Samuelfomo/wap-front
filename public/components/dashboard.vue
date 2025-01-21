@@ -24,9 +24,9 @@
       </router-link>
     </div>
 
-    <div :class="[$route.name === 'message' ? activeClass : inactiveClass,'text-md font-bold justify-center items-center flex px-4 py-2 gap-1']">
+    <div :class="[$route.name === 'service' ? activeClass : inactiveClass,'text-md font-bold justify-center items-center flex px-4 py-2 gap-1']">
 <!--    <div class="text-md font-bold text-gray-950 justify-center items-center flex px-4 py-2 gap-1 hover:bg-gray-500 hover:text-white hover:border hover:border-green-300 ">-->
-      <router-link to="#" class="flex items-center gap-1">
+      <router-link to="/service" class="flex items-center gap-1">
         <svg  xmlns="http://www.w3.org/2000/svg"  width="16"  height="16"  viewBox="0 0 24 24"  fill="currentColor"
               class="icon icon-tabler icons-tabler-filled icon-tabler-message-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/>
           <path d="M18 3a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-2.586l-2.707 2.707a1 1 0 0 1 -1.32 .083l-.094 -.083l-2.708 -2.707h-2.585a4
@@ -36,8 +36,8 @@
         <span class="font-medium">Service</span>
       </router-link>
     </div>
-    <div :class="[$route.name === 'prospect' ? activeClass : inactiveClass,'text-md font-bold justify-center items-center flex px-4 py-2 gap-1']">
-      <router-link to="#" class="flex items-center gap-1">
+    <div :class="[$route.name === 'contact' ? activeClass : inactiveClass,'text-md font-bold justify-center items-center flex px-4 py-2 gap-1']">
+      <router-link to="/contact" class="flex items-center gap-1">
 <!--        <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"-->
 <!--              stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"-->
 <!--              class="icon icon-tabler icons-tabler-outline icon-tabler-users-group">-->

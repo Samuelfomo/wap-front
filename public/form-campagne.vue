@@ -7,7 +7,6 @@ import Dashboard from "@public/components/dashboard.vue"
 
 const showModal = ref(false)
 const currentStep = ref(0)
-const steps = ['Informations', 'Résumé']
 const activeMenu = ref(false)
 const showVariableModal = ref(false)
 
@@ -143,7 +142,7 @@ const todoMenu = () =>{
 
     <!-- Multi-step Modal -->
     <div v-if="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div class="flex justify-between rounded-lg w-full max-w-6xl bg-white ">
+      <div class="flex justify-between rounded-lg w-full max-w-6xl bg-white h-[75vh]">
             <div class="p-6 w-full border-r">
               <div class="border-b px-6 py-4">
                 <h1 class="text-xl font-semibold">Créer une nouvelle campagne</h1>
@@ -166,7 +165,8 @@ const todoMenu = () =>{
                   <div>
                     <label class="block text-sm font-medium text-gray-700">Intitulé de la campagne*</label>
                     <input v-model="campaignForm.name" type="text"
-                           class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500"
+                           class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:border-green-500 focus:ring-1
+                 focus:ring-green-400 transition duration-300"
                            required>
                   </div>
                 </div>
@@ -183,7 +183,8 @@ const todoMenu = () =>{
                   <textarea id="messageTemplate"
                             v-model="campaignForm.messageTemplate"
                             rows="4"
-                            class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-blue-500"
+                            class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:border-green-500 focus:ring-1
+                 focus:ring-green-400 transition duration-300"
                             required></textarea>
                   <div class="flex gap-2 mt-1">
                     <button @click="viewVariableModal"
@@ -217,7 +218,7 @@ const todoMenu = () =>{
                 </button>
               </div>
             </div>
-            <div class="py-6 px-2 w-full max-w-md border-l">
+            <div class="py-6 px-2 w-full max-w-md border-l h-full">
               <div class="border-b px-6 py-4">
                 <h1 class="text-xl font-semibold">Résumé de la campagne</h1>
                 <div class="flex justify-between items-center mt-4">
@@ -233,8 +234,8 @@ const todoMenu = () =>{
                   </div>
                 </div>
               </div>
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <dl class="grid grid-cols-2 gap-4">
+              <div class="bg-gray-50 p-4 rounded-lg h-[52vh]">
+            <dl class="grid grid-cols-2 gap-4">
                   <div>
                     <dt class="text-sm text-gray-500">Intitulé</dt>
                     <dd class="text-sm font-medium">{{ campaignForm.name }}</dd>
