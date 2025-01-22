@@ -74,8 +74,8 @@ class Login{
         const accountRegex = /^\d{8}$/;
         const cleanedACCOUNT = this.mobile.toString();
         if (!accountRegex.test(cleanedACCOUNT)) {
-            console.log('Your ACCOUNT NUMBER is invalid. It must be exactly 14 digits.');
-            // throw new Error('Your ACCOUNT NUMBER is invalid. It must be exactly 14 digits.');
+            console.log('Your ACCOUNT NUMBER is invalid. It must be exactly 8 digits.');
+            // throw new Error('Your ACCOUNT NUMBER is invalid. It must be exactly 8 digits.');
             return false;
         }
         return true;
