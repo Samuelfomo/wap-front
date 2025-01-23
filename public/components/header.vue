@@ -40,16 +40,6 @@
           >
             Recharge
           </router-link>
-<!--          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100"-->
-<!--                       :class="[$route.name === 'historique' ? activeClass : inactiveClass]"-->
-<!--          >-->
-<!--            Historique-->
-<!--          </router-link>-->
-<!--          <router-link to="#" class="block px-4 py-2 text-gray-700 hover:bg-green-100"-->
-<!--                       :class="[$route.name === 'support' ? activeClass : inactiveClass]"-->
-<!--          >-->
-<!--            Support & Aide-->
-<!--          </router-link>-->
           <button @click="handleLogout" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-green-100">
             Déconnexion
           </button>
@@ -60,7 +50,7 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {onMounted, onUnmounted, ref} from 'vue';
 import Logo from "@/assets/images/logo-wap.svg";
 import Avatar from "@/assets/images/avatar.svg";
