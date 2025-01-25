@@ -4,7 +4,7 @@ import { useLoginStore } from '@/stores/loginStore'
 import Login from "@public/login.vue";
 import Check from "@public/check-user.vue";
 import Home from "@public/home.vue";
-import Service from "@public/form-message.vue";
+import Service from "@public/service.vue";
 import Contact from "@public/contact.vue";
 import Compte from "@public/parameter/compte.vue";
 import Campagne from "@public/form-campagne.vue";

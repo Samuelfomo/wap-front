@@ -76,7 +76,7 @@ const route = useRoute();
 const isLoading = ref(false);
 const pin = ref(['', '', '', '']);
 
-const mobileFromQuery = Number(route.query.mobile as string)
+const mobileFromQuery = Number(route.query.account_number as string)
 console.log('mobile received has:',mobileFromQuery)
 
 const errors = ref({
@@ -130,7 +130,7 @@ const handleSubmit = async () => {
     const pinValue = Number(pin.value.join('').replace(/\s+/g, '').trim());
     try {
       isLoading.value = true;
-      const pinvalid = new Login(null, null, null, pinValue);
+      const pinvalid = new Login(null, null, null, pinValue, null, null, null, null);
       console.log('pin send is:', pinValue)
       const isPinValid = pinvalid.PIN_validator();
       if (!isPinValid) {
@@ -138,13 +138,17 @@ const handleSubmit = async () => {
         return;
       }
 
-      const response = new Login(null, null, mobileFromQuery, pinValue);
+      const response = new Login(null, null, null, pinValue, null, mobileFromQuery, null, null);
       const result = await response.Login();
       if(result) {
         const loginStore = useLoginStore();
         loginStore.setUserData({
           mobile: result.mobile,
-          guid: result.guid
+          guid: result.guid,
+          account_name: result.account_name,
+          account_number: result.account_number,
+          firstname : result.firstname,
+          lastname : result.lastname
         })
         // loginStore.setUserData(result);
 

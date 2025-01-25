@@ -19,6 +19,10 @@ export const useLoginStore = defineStore('login', {
     getters: {
         mobile: (state) => state.userData?.mobile || null,
         guid: (state) => state.userData?.guid || null,
+        account_name: (state) => state.userData?.account_name || null,
+        account_number: (state) => state.userData?.account_number || null,
+        lastname: (state) => state.userData?.lastname || null,
+        firstname: (state) => state.userData?.firstname || null,
         isLoggedIn: (state) => !!state.userData,
         // Ajout d'un getter pour obtenir toutes les données utilisateur
         allUserData: (state) => state.userData

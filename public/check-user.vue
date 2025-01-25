@@ -28,7 +28,7 @@
           <div class="relative border-gray-300 flex justify-center ">
             <input
                 type="tel"
-            v-model="mobile"
+            v-model="account_number"
                 placeholder="+237699888..."
                 class="text-end px-6 py-2 text-lg border border-gray-400 rounded-xl
                  focus:outline-none focus:border-green-600 focus:ring-2
@@ -36,7 +36,7 @@
                  placeholder-gray-400 font-bold"
             >
           </div>
-          <p v-if="errors.mobile" class="text-red-600 text-sm mt-1 text-center ">{{ errors.mobile }}</p>
+          <p v-if="errors.account_number" class="text-red-600 text-sm mt-1 text-center ">{{ errors.account_number }}</p>
         </div>
 
 
@@ -62,47 +62,51 @@ import {Login}  from "@/class/Login";
 const router = useRouter();
 
 const isLoading = ref(false);
-const mobile = ref('');
+const account_number = ref('');
 const errors = ref({
-  mobile: '',
+  account_number: '',
 });
 const handleSubmit = async () => {
   errors.value = {
-    mobile: ''
+    account_number: ''
   };
 
-  if (!mobile.value) {
-    errors.value.mobile = 'your account number is required';
+  if (!account_number.value) {
+    errors.value.account_number = 'your account number is required';
   }
 
-  if (isNaN(Number(mobile.value))) {
-    errors.value.mobile = "Please enter a valid account number"
+  if (isNaN(Number(account_number.value))) {
+    errors.value.account_number = "Please enter a valid account number"
   }
-  if (!errors.value.mobile) {
+  if (!errors.value.account_number) {
     isLoading.value = true;
-    const mobileData = mobile.value.replace(/\s+/g, '');
-    console.log('account number send is:', Number(mobileData))
+    const accountData = account_number.value.replace(/\s+/g, '');
+    console.log('account number send is:', Number(accountData))
     try {
       const response = new Login(
           null,
           null,
-          Number(mobileData),
+          null,
+          null,
+          null,
+          Number(accountData),
+          null,
           null
       )
-    // const valid = await response.Mobile_validator();
+    // const valid = await response.mobile_validator();
       const valid = response.ACCOUNT_validator();
-      console.log("verify mobile account is :", valid);
+      console.log("verify account_number is :", valid);
       if(valid){
-        console.log('mobile value', mobile.value)
+        console.log('account_number value', account_number.value)
         await new Promise(resolve => setTimeout(resolve, 1000));
         await router.push({
           name: 'login',
-          query: { mobile: mobile.value.toString() }
+          query: { account_number: account_number.value.toString() }
         });
       } else {
-        errors.value.mobile = "Your ACCOUNT NUMBER is invalid. It must be exactly 8 digits.";
+        errors.value.account_number = "Your ACCOUNT NUMBER is invalid. It must be exactly 8 digits.";
         setTimeout(() => {
-          errors.value.mobile = "";
+          errors.value.account_number = "";
         }, 3000);
       }
 
@@ -110,9 +114,9 @@ const handleSubmit = async () => {
       console.log('error has occurred',error)
       throw new Error('Authentification fail!');
     }
-    // finally {
-    //   isLoading.value = false;
-    // }
+    finally {
+      isLoading.value = false;
+    }
   }
 }
 

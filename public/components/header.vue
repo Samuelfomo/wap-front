@@ -7,7 +7,7 @@
     <div class="text-sm text-gray-700 flex relative">
       <div class="flex items-center space-x-2">
         <img @click="toggleDropdown" :src="avatar" alt="image" class="rounded-full border-2 border-green-500 lg:h-8 lg:w-8 h-6 w-6 cursor-pointer">
-        <h2 @click="toggleDropdown" class="cursor-pointer hover:text-green-600 lg:text-lg text-xs">Rasland Arnold<select>
+        <h2 @click="toggleDropdown" class="cursor-pointer hover:text-green-600 lg:text-lg text-xs">{{lastname}} {{firstname}}<select>
         </select></h2>
       </div>
 
@@ -56,10 +56,13 @@ import Logo from "@/assets/images/logo-wap.svg";
 import Avatar from "@/assets/images/avatar.svg";
 
 import { useLoginStore } from '@/stores/loginStore';
+import { storeToRefs } from 'pinia'
 import {useRouter} from "vue-router";
+
 
 const router = useRouter()
 const store = useLoginStore()
+const { mobile, guid, account_name, account_number, firstname, lastname, isLoggedIn } = storeToRefs(store)
 
 const logo = ref(Logo)
 const avatar = ref(Avatar)

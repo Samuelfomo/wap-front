@@ -15,11 +15,13 @@ import { useLoginStore } from '@/stores/loginStore'
 import { storeToRefs } from 'pinia'
 // import {data} from "autoprefixer";
 
+import {Login} from "@/class/Login";
+
 const router = useRouter()
 const store = useLoginStore()
 // Utiliser storeToRefs pour préserver la réactivité
-const { mobile, guid, isLoggedIn } = storeToRefs(store)
-console.log("data received is :",  mobile.value, guid.value, isLoggedIn.value );
+const { mobile, guid, account_name, account_number, firstname, lastname, isLoggedIn } = storeToRefs(store)
+console.log("data received is :", mobile.value, guid.value, account_name.value, account_number.value, firstname.value, lastname.value, isLoggedIn.value  );
 
 const avatar = Avatar;
 const lock = Lock;
@@ -45,11 +47,12 @@ const relo = () => {
 }
 
 const profileForm = reactive({
-  firstName: '',
-  lastName: '',
-  name: '',
-  phone: '',
-  address: mobile.value || ''
+  guid: guid.value || '',
+  firstName: firstname.value || '',
+  lastName: lastname.value || '',
+  name: account_name.value || '',
+  phone: mobile.value || '',
+  address: account_number.value || ''
 });
 const passwordForm = reactive({
   currentPassword: '',
@@ -70,7 +73,7 @@ const errors = reactive({
 // Fonctions de validation
 const validateProfile = () => {
   errors.profile = {};
-  if (!profileForm.firstName) errors.profile.firstName = 'Le prénom est requis';
+  // if (!profileForm.firstName) errors.profile.firstName = 'Le prénom est requis';
   if (!profileForm.lastName) errors.profile.lastName = 'Le nom est requis';
   if (!profileForm.name) errors.profile.name = 'Le nom du compte est requis';
   if (!profileForm.phone) errors.profile.phone = 'Le téléphone est requis';
@@ -100,9 +103,19 @@ const validateRecharge = () => {
 const handleProfileSubmit = async () => {
   if (!validateProfile()) return;
   try {
+    const Profile = new Login(
+        null,
+        profileForm.guid,
+        profileForm.phone,
+        null,
+        profileForm.name,
+        profileForm.address,
+        profileForm.firstName,
+        profileForm.lastName
+    )
     // Appel API pour mettre à jour le profil
-    console.log('Mise à jour du profil:', profileForm);
-    // await updateProfile(profileForm);
+    console.log('Mise à jour du profil:', Profile);
+    await Profile.updateProfile();
   } catch (error) {
     console.error('Erreur lors de la mise à jour du profil:', error);
   }
@@ -162,8 +175,8 @@ const handleLogout = async () => {
                 <img :src="avatar" alt="image" class="h-20 w-20 p-1">
               </div>
             </div>
-            <h2 class="capitalize text-lg font-medium text-black">mon compte</h2>
-            <h3 class="text-md font-medium text-gray-500 capitalize">mon numero de compte</h3>
+            <h2 class="capitalize text-lg font-medium text-black">{{profileForm.name}}</h2>
+            <h3 class="text-md font-medium text-gray-500 capitalize">{{ profileForm.address }} {{guid}}</h3>
           </div>
 
           <div class="shadow bg-white my-5 ">

@@ -5,11 +5,11 @@ class Login {
         this.baseUrl = "http://192.168.100.103:3000";
     }
 
-    async connect(pin, mobile) {
+    async connect(pin, account_number) {
         try {
             const response = await axios.put(`${this.baseUrl}/login/auth/`, {
                 pin: String(pin),
-                mobile: String(mobile)
+                account_number: String(account_number)
             }, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -28,6 +28,44 @@ class Login {
             }
         }
     }
+
+    // async update(data: {
+    //     guid?: number,
+    //     mobile?: number,
+    //     account_number: string,
+    //     account_name?: string,
+    //     firstname?: string,
+    //     lastname?: string
+    // }) {
+    //     try {
+    //         const response = await axios.put(`${this.baseUrl}/login/auth/`, {
+    //             guid: data.guid,
+    //             mobile: data.mobile,
+    //             account_number: String(data.account_number),
+    //             account_name: data.account_name,
+    //             firstname: data.firstname,
+    //             lastname: data.lastname
+    //         }, {
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             timeout: 5000 // 5 seconds timeout
+    //         });
+    //
+    //         return response.data;
+    //
+    //     } catch (error) {
+    //         if (axios.isAxiosError(error)) {
+    //             if (error.response?.status === 401) {
+    //                 throw new Error(error.response.data.message || 'update failed');
+    //             } else if (error.code === 'ECONNABORTED') {
+    //                 throw new Error('Connection timeout');
+    //             }
+    //         }
+    //
+    //         throw new Error('Connection error with update service');
+    //     }
+    // }
 }
 
 // class Login {
