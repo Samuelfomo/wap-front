@@ -7,7 +7,7 @@ import Home from "@public/home.vue";
 import Service from "@public/service.vue";
 import Contact from "@public/contact.vue";
 import Compte from "@public/parameter/compte.vue";
-import Campagne from "@public/form-campagne.vue";
+import Campagne from "@public/campagne.vue";
 import Chart from "@public/chart.vue";
 import contactForm from "@public/contact-form.vue";
 
@@ -95,7 +95,7 @@ export default router;
 // import Service from "@public/form-message.vue";
 // import Contact from "@public/contact.vue";
 // import Compte from "@public/parameter/compte.vue";
-// import Campagne from "@public/form-campagne.vue";
+// import Campagne from "@public/campagne.vue";
 // import Chart from "@public/chart.vue";
 //
 // const routes = [
@@ -181,7 +181,7 @@ export default router;
  // import Service from "@public/form-message.vue";
  // import Contact from "@public/contact.vue";
  // import Compte from "@public/parameter/compte.vue";
- // import Campagne from "@public/form-campagne.vue";
+ // import Campagne from "@public/campagne.vue";
  // import Chart from "@public/chart.vue";
  //
  // const routes = [

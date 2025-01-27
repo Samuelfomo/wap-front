@@ -37,7 +37,7 @@
                     </svg>
                   </span>
                 </div>
-                <div class="text-xl font-bold text-gray-950">{{ formatPrice(accountInfo.balance) }}</div>
+                  <div class="text-xl font-bold text-gray-950">{{ formatPrice(accountInfo.balance) }}</div>
                 <div class="text-xs font-roboto text-gray-500">Dernière recharge: {{ formatDate(accountInfo.lastRecharge) }}</div>
               </div>
             </div>
